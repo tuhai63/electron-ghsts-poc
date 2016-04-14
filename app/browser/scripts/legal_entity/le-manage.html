@@ -1,0 +1,98 @@
+<div style="width:100%" layout="column">
+    <md-toolbar class="md-whiteframe-z1" layout="row">
+        <md-button class="md-warn" aria-label="Home" ng-href="#/home">Home</md-button>
+        <h2>
+          <span>Legal Entity Management</span>
+        </h2>
+    </md-toolbar>
+    <div style="width:100%" layout="row">
+        <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+            <!--  md-is-locked-open="$mdMedia('gt-sm')"-->
+            <md-toolbar layout="row" class="md-whiteframe-z1">
+                <md-headline layout-padding>Legal Entities</md-headline>
+            </md-toolbar>
+            <md-input-container style="margin-bottom:0">
+                <label>Legal Entity</label>
+                <input required name="legalEntityName" ng-model="_ctrl.filterText" ng-change="_ctrl.filterLegalEntity()">
+            </md-input-container>
+            <md-list>
+                <!-- notice work around for nedb. 'track by index'' to fix $$hashkey problem -->                
+                <md-list-item ng-repeat="it in _ctrl.legalEntities track by $index" ng-click="_ctrl.selectLegalEntity(it, $index)">
+                    <p>{{it.LEGALENTITY_NAME}}</p>
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+
+        <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
+            <md-toolbar layout="row" class="md-whiteframe-z1">
+                <md-headline layout-padding>{{ _ctrl.selected.LEGALENTITY_NAME }}</md-headline>
+            </md-toolbar>            
+                         
+            <md-content layout-padding class="autoScroll">
+                <form name = "leForm">
+                    <div layout-gt-xs="row">
+                        <md-input-container class="md-block" flex-gt-xs>                        
+                            <label>Identifier</label>
+                            <input ng-model="_ctrl.selected._identifier">
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container  class="md-block" flex-gt-sm>
+                            <label>Name</label>
+                            <input ng-model="_ctrl.selected.LEGALENTITY_NAME" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>PID</label>
+                            <input ng-model="_ctrl.selected.LEGALENTITY_PID" type="text" ng-required="false">
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container>
+                            <label>Type</label>
+                            <input ng-model="_ctrl.selected.LEGALENTITY_TYPE.VALUE" type="text">
+                        </md-input-container>                        
+                        <md-input-container>
+                            <label>Status</label>
+                            <input ng-model="_ctrl.selected.METADATA_STATUS.VALUE" type="text">
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Address</label>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.STREET1" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.STREET2" placeholder="Address Line 2" type="text">
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>City</label>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.CITY" type="text">
+                        </md-input-container>                        
+                        <md-input-container>
+                            <label>State/Provice</label>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.STATE" type="text">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Country</label>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.COUNTRY.VALUE_DECODE" type="text">
+                        </md-input-container>
+                    </div>
+                </form>
+            </md-content>
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <!--d-button class="md-raised md-info" ng-click="_ctrl.createLegalEntity()">Add</md-button-->
+                <md-button class="md-raised md-primary" ng-click="_ctrl.saveLegalEntity()">Save</md-button>
+                <md-button class="md-raised md-danger" ng-click="_ctrl.cancelEdit()">Cancel</md-button>
+                <md-button class="md-raised md-warn" ng-click="_ctrl.deleteLegalEntity()">Delete</md-button>      
+                <md-button class="md-raised md-primary" ng-click="_ctrl.viewLegalEntityJson()">View LE JSON</md-button>                
+                <md-button class="md-raised md-primary" ng-click="_ctrl.viewLegalEntityGHSTS()">View LE GHSTS</md-button>                                      
+                
+                <md-button class="md-raised md-warn" ng-click="_ctrl.addTestLE()">Add Sample LE to DB</md-button>   
+                <md-button class="md-raised md-warn" ng-click="_ctrl.initializeLE()">Initalize DB with Sample GHSTS LE</md-button>
+                
+            </section>  
+        </div>
+    </div>
+</div>

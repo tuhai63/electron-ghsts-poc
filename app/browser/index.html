@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ghstsApp">
+<head>
+    <title>Customer Manager</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- build:css assets/css/app.css -->
+    <!-- alternatively use import in app.js -->
+    <link href="./jspm_packages/github/twbs/bootstrap@3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- now loaded from app.js -->
+    <!--link rel="stylesheet" href="./jspm_packages/github/angular/bower-material@1.0.4/angular-material.css" /-->
+    <!-- endbuild -->
+    <script src="./jspm_packages/system.js"></script>
+    <script src="./config.js"></script>    <!-- endbuild -->
+    <script>
+        System
+            .import('./scripts/app')
+            .catch( console.error.bind(console) ); // make sure any errors print to console;
+    </script>
+</head>
+<body>
+    <ng-view></ng-view>
+    <!-- build:js scripts/vendor.js -->    
+    <!-- build:app scripts/app.js -->
+    <!-- endbuild -->
+</body>
+</html>
