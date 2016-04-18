@@ -66,18 +66,17 @@ class ReceiverService {
         return deferred.promise;
     }
 
+    // the following are demo related methods.  can be moved to a dedicated test class later
     getReceiverGHSTSById(id) {
-        // return GHSTS xml from legal entity json. 
+        // return GHSTS xml from receiver json. 
         let deferred = this.$q.defer();
         this.receivers.find({ '_id': id }, function (err, result) {
             if (err) deferred.reject(err);           
             
             // retrieved Json from database
             let rcvrJSON = result[0];
-            // create Receiver based on leJSON
-            let sender = new Sender(rcvrJSON.SENDER);           
+            // create Receiver based on receiver JSON    
             let rcvr = new Receiver(rcvrJSON);
-            rcvr.SENDER = sender;
                         
             // convert to XML
             let builder = new xml2js.Builder({ rootName: 'RECEIVER', attrkey: 'attr$' });
@@ -85,10 +84,8 @@ class ReceiverService {
             deferred.resolve(xml);
         });
         return deferred.promise;
-    }
+    }   
     
-    
-    // the following are demo related methods.  can be moved to a dedicated class later
     initializeReceivers() {
         // read from sample ghsts and populate the database with receivers.
         let ghsts = new GHSTS("./app/browser/data/ghsts.xml");
@@ -143,7 +140,7 @@ class ReceiverService {
     }
 
     addReceiverToDB() {  
-        // add a new legal entity to database
+        // add a new receiver to database
         let rcvr = this._createSampleReceiver();
         this.createReceiver(rcvr);
     }

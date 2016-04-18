@@ -97,6 +97,7 @@ class LegalEntityService {
         return deferred.promise;
     }
     
+    // the following are demo related methods.  can be moved to a dedicated test class later    
     getLegalEntityGHSTSById(id) {
         // return GHSTS xml from legal entity json. 
         let deferred = this.$q.defer();
@@ -116,8 +117,6 @@ class LegalEntityService {
         return deferred.promise;
     }
     
-    
-    // the following are demo related methods.  can be moved to a dedicated class later
     initializeLE(){
         // read from sample ghsts and populate the database with legal entities.
         let ghsts = new GHSTS("./app/browser/data/ghsts.xml");     
