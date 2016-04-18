@@ -1,4 +1,7 @@
 import angular from 'angular';
+import {ValueStruct, IdentifierStruct} from '../common/sharedModel.js';
+import {Receiver, Sender} from './receiverModel.js'
+import uuid from 'node-uuid';
 
 class ReceiverController {
     constructor($mdDialog, ReceiverService, LegalEntityService) {
@@ -71,7 +74,12 @@ class ReceiverController {
     }
     
     createReceiver() {
-        this.selected = {};
+        // create a new receiver and set defaults
+        let rcvr = new Receiver();
+        rcvr._identifier = uuid.v4();    
+        rcvr.METADATA_STATUS = new ValueStruct();
+
+        this.selected = rcvr;
         this.selectedIndex = null;
     }
     

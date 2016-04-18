@@ -1,5 +1,6 @@
 import Nedb from 'nedb';
 import xml2js from 'xml2js';
+import uuid from 'node-uuid';
 import {GHSTS} from '../common/ghsts.js'
 import {ContactPerson, ContactAddress, LegalEntity} from './legalEntityModel.js';
 import {ValueStruct, IdentifierStruct} from '../common/sharedModel.js'
@@ -189,7 +190,7 @@ class LegalEntityService {
                     
         let le = new LegalEntity();
         le.METADATA_STATUS =  new ValueStruct('New', 'New');               
-        le.LEGALENTITY_PID = 'PID_123456';    
+        le.LEGALENTITY_PID = 'urn:' + uuid.v4();       
         le.LEGALENTITY_NAME = 'Ottawa Drug System';    
         le.LEGALENTITY_TYPE = new ValueStruct('Company', 'Company');    
         le.CONTACT_ADDRESS = contactAddr;               
@@ -215,7 +216,7 @@ class LegalEntityService {
                      
         let leRA = new LegalEntity();
         leRA.METADATA_STATUS =  new ValueStruct('New', 'New');               
-        leRA.LEGALENTITY_PID = 'PID_900001';    
+        leRA.LEGALENTITY_PID = 'urn:' + uuid.v4();    
         leRA.LEGALENTITY_NAME = 'Health Canada';    
         leRA.LEGALENTITY_TYPE = new ValueStruct('Regulatory Authority', 'Regulatory Authority');    
         leRA.CONTACT_ADDRESS = contactAddrRA;               

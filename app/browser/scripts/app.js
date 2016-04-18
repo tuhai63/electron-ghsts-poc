@@ -2,6 +2,7 @@ import angular from 'angular';
 import ngRouter from 'angular-route';
 import ngMaterial from 'angular-material';
 import ngAnimate from '../jspm_packages/github/angular/bower-angular-animate@1.4.9/angular-animate';
+import ngMessages from 'angular-messages';
 import {LegalEntityService} from './legal_entity/legalEntityService'; 
 import {LegalEntityController} from './legal_entity/legalEntityController';
 import {ReceiverService} from './receiver/receiverService'; 
@@ -11,7 +12,7 @@ import {GhstsController} from './ghsts_demo/ghstsController';
 // notice stylesheet loading from app.js
 import '../jspm_packages/github/angular/bower-material@1.0.4/angular-material.css!';
 
-angular.module('ghstsApp', ['ngRoute', 'ngMaterial', 'ngAnimate'])
+angular.module('ghstsApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngMessages'])
     .config(config)
     .service('legalEntityService', ['$q', LegalEntityService])
     .controller('legalEntityController', ['$mdDialog', 'legalEntityService', LegalEntityController])

@@ -6,7 +6,7 @@ class Sender {
             Object.assign(this, json);
         }else{  
             this._toLegalEntityId = null;  
-            this.COMPANY_CONTACT_REGULATORY_ROLE = null;
+            this.COMPANY_CONTACT_REGULATORY_ROLE = 'Sender';
             this.REMARK = null;
         }
     }  
@@ -35,8 +35,8 @@ class Receiver {
             this._toLegalEntityId = null;        
             this.METADATA_STATUS = {};         // of ValueStruct
             this.SHORT_NAME = null;
-            this.ROLE = null;
-            this.SENDER = {};                   // of Sender
+            this.ROLE = 'Recipient';
+            this.SENDER = new Sender();                   // of Sender
         }     
     }
     

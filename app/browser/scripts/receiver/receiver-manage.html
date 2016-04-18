@@ -29,17 +29,17 @@
             </md-toolbar>            
                          
             <md-content layout-padding class="autoScroll">
-                <form name = "leForm">
-                    <div layout-gt-xs="row">                        
+                <form name = "recevierForm">
+                    <!--div layout-gt-xs="row">                        
                         <md-input-container class="md-block" flex-gt-xs>                        
                             <label>Identifier</label>
-                            <input ng-model="_ctrl.selected._identifier">
+                            <input ng-model="_ctrl.selected._identifier" readonly>
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-xs>
                             <label>Receiver Legal Entity Id</label>
-                            <input ng-model="_ctrl.selected._toLegalEntityId" type="text">
+                            <input ng-model="_ctrl.selected._toLegalEntityId" type="text" readonly>
                         </md-input-container> 
-                    </div>
+                    </div-->
                     <div layout-gt-sm="row">
                         <md-input-container class="md-block" flex-gt-sm> 
                             <label>Receiver Legal Entity Name</label>
@@ -52,19 +52,22 @@
                     <div layout-gt-sm="row">
                         <md-input-container  class="md-block" flex-gt-sm>
                             <label>Short Name</label>
-                            <input ng-model="_ctrl.selected.SHORT_NAME" type="text">
+                            <input name="shortName" ng-model="_ctrl.selected.SHORT_NAME" type="text" required>
+                            <div ng-messages="recevierForm.shortName.$error">
+                                <div ng-message="required">Short Name is required.</div>
+                            </div>
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Role</label>
-                            <input ng-model="_ctrl.selected.ROLE" type="text" ng-required="false">
+                            <input ng-model="_ctrl.selected.ROLE" type="text" ng-required="false" readonly>
                         </md-input-container>
                     </div>
-                    <div layout-gt-sm="row">
+                    <!--div layout-gt-sm="row">
                         <md-input-container class="md-block" flex-gt-xs>
                             <label>Sender Legal Entity Id</label>
-                            <input ng-model="_ctrl.selected.SENDER._toLegalEntityId" type="text">
+                            <input ng-model="_ctrl.selected.SENDER._toLegalEntityId" type="text" readonly>
                         </md-input-container> 
-                    </div>
+                    </div-->
                     <div layout-gt-sm="row">
                         <md-input-container class="md-block" flex-gt-sm> 
                             <label>Sender Legal Entity Name</label>
@@ -83,8 +86,8 @@
                 </form>
             </md-content>
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <!--d-button class="md-raised md-info" ng-click="_ctrl.createLegalEntity()">Add</md-button-->                                
-                <md-button class="md-raised md-primary" ng-click="_ctrl.saveReceiver()">Save</md-button>
+                <md-button class="md-raised md-info" ng-click="_ctrl.createReceiver()">Add</md-button>                                
+                <md-button class="md-raised md-primary" ng-click="_ctrl.saveReceiver()" ng-disabled="recevierForm.$invalid">Save</md-button>
                 <md-button class="md-raised md-danger" ng-click="_ctrl.cancelEdit()">Cancel</md-button>
                 <md-button class="md-raised md-warn" ng-click="_ctrl.deleteReceiver()">Delete</md-button>      
                 <md-button class="md-raised md-primary" ng-click="_ctrl.viewReceiverJson()">View Receiver JSON</md-button>                

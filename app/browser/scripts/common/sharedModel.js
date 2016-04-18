@@ -1,5 +1,5 @@
 class ValueStruct {
-    constructor(value, decode){
+    constructor(value = 'New', decode = 'New'){
         this.VALUE = value;
         this.VALUE_DECODE = decode;
     }
