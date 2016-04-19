@@ -7,12 +7,12 @@ The ES6 application is based on the App Boilerplate for Electron by Thorsten Han
 
 This POC uses the following components and features:
 
-Electron;
-Angular 1.x; (Angular 2.0 is still in beta at this moment)
-ES6;
-Angular Material;
-XML2JS;
-NoSQl Javascript Database NeDB.
+ * Electron;
+ * Angular 1.x; (Angular 2.0 is still in beta at this moment)
+ * ES6;
+ * Angular Material;
+ * XML2JS;
+ * NoSQl Javascript Database NeDB.
 
 ## PreConditions for client
 
