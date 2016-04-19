@@ -1,7 +1,7 @@
 {
-  "name": "electron-sample",
+  "name": "electron-ghsts-poc",
   "version": "1.0.0",
-  "description": "My first electron app",
+  "description": "Desktop GHSTS POC",
   "main": "main/index.js",
   "scripts": {
     "postinstall": "jspm install"
@@ -10,7 +10,7 @@
     "electron-app"
   ],
   "author": "Wei Fang",
-  "repository": "",
+  "repository": "https://github.com/weifang993/electron-ghsts-poc.git",
   "license": "MIT",
   "devDependencies": {
     "del": "^1.2.0",
