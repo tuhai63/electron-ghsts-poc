@@ -12,9 +12,9 @@ ipc.on('devTools', function (event, arg) {
 
 app.on('window-all-closed', function () {
     // force app termination on OSX when mainWindow has been closed
-    if (process.platform == 'darwin') {
+    //if (process.platform == 'darwin') {
         app.quit();
-    }
+    //}
 });
 
 app.on('ready', function () {
