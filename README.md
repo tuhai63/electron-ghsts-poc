@@ -16,11 +16,13 @@ This POC uses the following components and features:
 
 ## PreConditions for client
 
-Ensure that the following node packages are installed on your system
+Ensure that the following node packages are installed on your system.
 
  * jspm and electron_prebuilt
 
-you can install it using `npm install jspm -g` and `npm install electron-prebuilt -g`
+You can install it using `npm install jspm -g` and `npm install electron-prebuilt -g`. 
+It is advisable to locally install jspm in additional to globally installing it to lock the version of jspm for a specific project. 
+Go to app directory and run `npm install jspm`.
 
 ## Install dependencies
 
