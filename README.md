@@ -30,7 +30,7 @@ After cloning the repo execute `npm install` in 'app' subdirectory to install al
 
 ## Run the application
 
-type 'electron app'
+Go the parent directory of app, type 'electron app'.
 
 ## Creating the Electorn App package
 
