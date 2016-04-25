@@ -30,7 +30,16 @@ After cloning the repo execute `npm install` in 'app' subdirectory to install al
 
 ## Run the application
 
-Go the parent directory of app, type 'electron app'.
+Go to the parent directory of app, type 'electron app'.
+
+
+## Debug the browser process of the application with built-in Chrome debugger
+
+Once the application is running, go to menu 'View->Toggle Developer Tools'.
+
+## Debug the main process of the application with Visual Studio Code
+
+Go to the parent directory of app, type 'electron -debug app'.  In Visual Studio Code, start debugger by 'Attach'. For electron document on this subject, go to http://electron.atom.io/docs/v0.33.0/tutorial/debugging-main-process/.
 
 ## Creating the Electorn App package
 
