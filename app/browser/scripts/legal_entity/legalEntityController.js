@@ -1,4 +1,5 @@
 import angular from 'angular';
+import {ContactPersonController} from './contactPersonController.js';
 
 class LegalEntityController {
     constructor($mdDialog, LegalEntityService) {
@@ -86,6 +87,20 @@ class LegalEntityController {
                 this.selected = legalEntities[0];
             });
         }
+    }
+    
+    addContactPerson($event) {
+        this.$mdDialog.show( {
+            controller: ContactPersonController,
+            controllerAs: '_ctrl',
+            templateUrl: './scripts/legal_entity/contactPerson.html',
+            parent: angular.element(document.body),
+            targetEvent: $event,
+            clickOutsideToClose: false,
+            locals: {
+                contactPerson: {}
+            }
+        })
     }
     
     viewLegalEntityJson($event) {

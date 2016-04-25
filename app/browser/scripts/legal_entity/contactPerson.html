@@ -1,0 +1,78 @@
+<md-dialog aria-label="Contact Person" ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Contact Person</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="_ctrl.cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+        <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
+            <md-toolbar layout="row" class="md-whiteframe-z1">
+                <md-headline layout-padding>{{ _ctrl.contactPerson.LEGALENTITY_NAME }}</md-headline>
+            </md-toolbar>            
+                         
+            <md-content layout-padding class="autoScroll">
+                <form name = "leForm">
+                    <div layout-gt-sm="row">
+                        <md-input-container  class="md-block" flex-gt-sm>
+                            <label>Organization</label>
+                            <input ng-model="_ctrl.contactPerson.ORGANIZATION" type="text">
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Department</label>
+                            <input ng-model="_ctrl.contactPerson.DEPARTMENT" type="text" ng-required="false">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Title</label>
+                            <input ng-model="_ctrl.contactPerson.TITLE" type="text">
+                        </md-input-container>  
+                    </div>                    
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>First Name</label>
+                            <input ng-model="_ctrl.contactPerson.FIRSTNAME" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Last Name</label>
+                            <input ng-model="_ctrl.contactPerson.LASTNAME" type="text">
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Phone</label>
+                            <input ng-model="_ctrl.contactPerson.PHONE" type="text">
+                        </md-input-container>                        
+                        <md-input-container>
+                            <label>Mobile</label>
+                            <input ng-model="_ctrl.contactPerson.MOBILE" type="text">
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container>
+                            <label>Fax</label>
+                            <input ng-model="_ctrl.contactPerson.FAX" type="text">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Email</label>
+                            <input ng-model="_ctrl.contactPerson.EMAIL" type="text">
+                        </md-input-container>
+                    </div>
+                </form>
+            </md-content>
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button class="md-raised md-primary" ng-click="_ctrl.saveContactPerson()">Save</md-button>                                
+            </section>  
+        </div>
+      </form>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button aria-label="Finished" ng-click="_ctrl.saveContactPerson($event)">Finished</md-button>
+  </md-dialog-actions>
+</md-dialog>
