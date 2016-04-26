@@ -103,6 +103,20 @@ class LegalEntityController {
         })
     }
     
+    viewContactPerson(person, $event) {
+        this.$mdDialog.show( {
+            controller: ContactPersonController,
+            controllerAs: '_ctrl',
+            templateUrl: './scripts/legal_entity/contactPerson.html',
+            parent: angular.element(document.body),
+            targetEvent: $event,
+            clickOutsideToClose: false,
+            locals: {
+                contactPerson: person
+            }
+        })
+    }
+    
     viewLegalEntityJson($event) {
         let self = this;
         if (this.selected != null && this.selected._id != null) {

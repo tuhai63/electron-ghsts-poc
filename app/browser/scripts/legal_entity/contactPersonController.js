@@ -1,11 +1,10 @@
 import angular from 'angular';
-import {ContactPerson} from './legalEntityModel.js';
 
 class ContactPersonController {
-    constructor($mdDialog, LegalEntityService) {
+    constructor(contactPerson, $mdDialog, LegalEntityService) {
         this.legalEntityService = LegalEntityService;
         this.$mdDialog = $mdDialog;  
-        this.contactPerson = {}; 
+        this.contactPerson = contactPerson; 
     }      
   
     cancel($event) {
@@ -17,7 +16,7 @@ class ContactPersonController {
     } 
 }
 
-ContactPersonController.$inject = ['$mdDialog', 'legalEntityService'];
+ContactPersonController.$inject = ['contactPerson', '$mdDialog', 'legalEntityService'];
 
 export { ContactPersonController }
 

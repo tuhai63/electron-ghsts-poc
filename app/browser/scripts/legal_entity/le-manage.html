@@ -18,6 +18,7 @@
             <md-list>
                 <!-- notice work around for nedb. 'track by index'' to fix $$hashkey problem -->                
                 <md-list-item ng-repeat="it in _ctrl.legalEntities track by $index" ng-click="_ctrl.selectLegalEntity(it, $index)">
+                    <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon>
                     <p>{{it.LEGALENTITY_NAME}}</p>
                 </md-list-item>
             </md-list>
@@ -79,6 +80,16 @@
                             <input ng-model="_ctrl.selected.CONTACT_ADDRESS.COUNTRY.VALUE_DECODE" type="text">
                         </md-input-container>
                     </div>
+                    
+                    <!--md-list ng-controller="_ctrl" ng-cloak-->
+                    <md-list>
+                    <!--md-divider></md-divider-->
+                        <md-subheader class="md-no-sticky">Contact Persons</md-subheader>
+                        <md-list-item ng-repeat=" person in _ctrl.selected.CONTACT_PERSON" ng-click="_ctrl.viewContactPerson(person, $event)" class="noright">
+                            <md-icon class="material-icons" aria-label="Person">person</md-icon>
+                            <p>{{ person.FIRSTNAME + ' ' + person.LASTNAME }}</p>                                        
+                        </md-list-item>
+                    </md-list>
                 </form>
             </md-content>
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>                
