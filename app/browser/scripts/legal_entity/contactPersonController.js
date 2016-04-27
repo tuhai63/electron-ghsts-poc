@@ -1,26 +1,26 @@
 import angular from 'angular';
 
 class ContactPersonController {
-    constructor(contactPerson, $mdDialog, LegalEntityService) {
-        this.legalEntityService = LegalEntityService;
+    constructor(contactPerson, legalEntityController, $mdDialog) {
+        this.legalEntityController = legalEntityController;
         this.$mdDialog = $mdDialog;  
         this.contactPerson = contactPerson; 
+        if(contactPerson === {}){
+            this.addMode = true;
+        }
     }      
   
     cancel($event) {
         this.$mdDialog.cancel();
     };    
-    
+
     saveContactPerson($event) {
-        this.$mdDialog.hide();  
-    } 
-    
-    addContactPerson($event) {
-        this.legalEntityService.addContactPerson(this.contactPerson);  
+        this.legalEntityController.saveContactPerson(this.contactPerson, this.addMode);  
+        this.$mdDialog.hide();
     } 
 }
 
-ContactPersonController.$inject = ['contactPerson', '$mdDialog', 'legalEntityService'];
+ContactPersonController.$inject = ['contactPerson', 'legalEntityController', '$mdDialog'];
 
 export { ContactPersonController }
 

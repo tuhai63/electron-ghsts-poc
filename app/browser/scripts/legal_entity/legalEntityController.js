@@ -89,7 +89,7 @@ class LegalEntityController {
         }
     }
     
-    
+    /*
     addContactPerson($event) {
         this.$mdDialog.show( {
             controller: ContactPersonController,
@@ -103,9 +103,10 @@ class LegalEntityController {
             }
         })
     }
+    */
     
     
-    saveContactPerson(person, $event) {
+    showContactPersonDiag(person, $event) {
         this.$mdDialog.show( {
             controller: ContactPersonController,
             controllerAs: '_ctrl',
@@ -114,9 +115,20 @@ class LegalEntityController {
             targetEvent: $event,
             clickOutsideToClose: false,
             locals: {
-                contactPerson: person
+                contactPerson: person,
+                legalEntityController: this
             }
         })
+    }
+    
+    saveContactPerson(person, addMode){
+        // save the person to the selected legal entity.
+        if(addMode === true){
+            // this is a new person
+            this.selected.CONTACT_PERSON.push(person);
+        } 
+        // save the new or modified contact person by updating the legal entity            
+        this.legalEntityService.updateLegalEntity(this.selected);
     }
     
     viewLegalEntityJson($event) {
