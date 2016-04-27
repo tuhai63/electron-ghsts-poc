@@ -1,4 +1,11 @@
 
+class LegalEntityIdentifier {
+    constructor(value, identifier){              
+        this.LEGALENTITY_IDENTIFIER_TYPE = value,         // of ValueStruct
+        this.IDENTIFIER = identifier;
+    }
+}
+
 class ContactPerson {
     constructor(organization, department, title, firstName, lastName, phone, mobile, fax, email){    
         this.ORGANIZATION = organization;
@@ -86,4 +93,4 @@ class LegalEntity {
     }          
 }    
 
-export {ContactPerson, ContactAddress, LegalEntity}
+export {LegalEntityIdentifier, ContactPerson, ContactAddress, LegalEntity}
