@@ -14,6 +14,10 @@ class ContactPersonController {
     saveContactPerson($event) {
         this.$mdDialog.hide();  
     } 
+    
+    addContactPerson($event) {
+        this.legalEntityService.addContactPerson(this.contactPerson);  
+    } 
 }
 
 ContactPersonController.$inject = ['contactPerson', '$mdDialog', 'legalEntityService'];

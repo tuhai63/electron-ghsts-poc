@@ -89,6 +89,7 @@ class LegalEntityController {
         }
     }
     
+    
     addContactPerson($event) {
         this.$mdDialog.show( {
             controller: ContactPersonController,
@@ -103,7 +104,8 @@ class LegalEntityController {
         })
     }
     
-    viewContactPerson(person, $event) {
+    
+    saveContactPerson(person, $event) {
         this.$mdDialog.show( {
             controller: ContactPersonController,
             controllerAs: '_ctrl',

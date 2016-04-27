@@ -2,11 +2,12 @@
   <form name = "contactPersonForm">
     <md-toolbar>
         <div class="md-toolbar-tools">
-        <h2>Contact Person</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="_ctrl.cancel()">
-            <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
-        </md-button>
+            <!--md-icon class="material-icons" aria-label="Person">person</md-icon-->
+            <h2>Contact Person</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="_ctrl.cancel()">
+                <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+            </md-button>
         </div>
     </md-toolbar>
     <md-dialog-content>
@@ -54,7 +55,8 @@
                 </md-input-container>
             </div>
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <md-button class="md-raised md-primary" ng-click="_ctrl.saveContactPerson()">Save</md-button>                        
+                <md-button class="md-raised md-primary" ng-click="_ctrl.addContactPerson()">Add</md-button>    
+                <md-button class="md-raised md-primary" ng-click="_ctrl.saveContactPerson()">Save</md-button>                             
             </section>  
         </div>
     </md-dialog-content>

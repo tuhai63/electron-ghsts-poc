@@ -97,6 +97,15 @@ class LegalEntityService {
         return deferred.promise;
     }
     
+    addContactPerson(contactPerson){
+        this.selected.CONTACT_PERSON.push(contactPerson);
+        updateLegalEntity(this.selected);
+    }
+    
+    updateContactPerson(contactPerson){
+        ;
+    }
+    
     // the following are demo related methods.  can be moved to a dedicated test class later    
     getLegalEntityGHSTSById(id) {
         // return GHSTS xml from legal entity json. 
