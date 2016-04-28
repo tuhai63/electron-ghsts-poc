@@ -94,7 +94,8 @@
                     <md-list>
                         <md-list-item ng-repeat=" person in _ctrl.selected.CONTACT_PERSON track by $index" ng-click="_ctrl.showContactPersonDiag(person, $event)" class="noright">
                             <md-icon class="material-icons" aria-label="Person">person</md-icon>
-                            <p>{{ person.FIRSTNAME + ' ' + person.LASTNAME }}</p>                                        
+                            <p>{{ person.FIRSTNAME + ' ' + person.LASTNAME }}</p>         
+                            <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteContactPerson(person, $event)">Delete</md-button>                                                          
                         </md-list-item>
                     </md-list>
                 </form>
