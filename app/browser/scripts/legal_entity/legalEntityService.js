@@ -91,10 +91,22 @@ class LegalEntityService {
     updateLegalEntity(legalEntity) {
         let deferred = this.$q.defer();
         this.legalEntities.update({_id: legalEntity._id}, legalEntity, {}, function (err, numReplaced) {
-            if (err) deferred.reject(err);
+            if (err) { 
+                deferred.reject(err);
+                console.log(err);
+            }
             deferred.resolve(numReplaced);
         });
         return deferred.promise;
+    }
+    
+    addContactPerson(contactPerson){
+        this.selected.CONTACT_PERSON.push(contactPerson);
+        updateLegalEntity(this.selected);
+    }
+    
+    updateContactPerson(contactPerson){
+        ;
     }
     
     // the following are demo related methods.  can be moved to a dedicated test class later    

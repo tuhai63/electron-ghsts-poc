@@ -9,13 +9,14 @@
     <!-- build:css assets/css/app.css -->
     <!-- alternatively use import in app.js -->
     <link href="./jspm_packages/github/twbs/bootstrap@3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- now loaded from app.js -->
     <!--link rel="stylesheet" href="./jspm_packages/github/angular/bower-material@1.0.4/angular-material.css" /-->
     <!-- endbuild -->
     <script src="./jspm_packages/system.js"></script>
     <script src="./config.js"></script>    <!-- endbuild -->
     <script>
-        System
+        System        
             .import('./scripts/app')
             .catch( console.error.bind(console) ); // make sure any errors print to console;
     </script>
