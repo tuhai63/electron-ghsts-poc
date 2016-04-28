@@ -92,7 +92,7 @@
                         </div>
                     </md-toolbar>
                     <md-list>
-                        <md-list-item ng-repeat=" person in _ctrl.selected.CONTACT_PERSON" ng-click="_ctrl.showContactPersonDiag(person, $event)" class="noright">
+                        <md-list-item ng-repeat=" person in _ctrl.selected.CONTACT_PERSON track by $index" ng-click="_ctrl.showContactPersonDiag(person, $event)" class="noright">
                             <md-icon class="material-icons" aria-label="Person">person</md-icon>
                             <p>{{ person.FIRSTNAME + ' ' + person.LASTNAME }}</p>                                        
                         </md-list-item>

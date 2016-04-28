@@ -1,11 +1,13 @@
 import angular from 'angular';
+import {_} from 'lodash';
 
 class ContactPersonController {
     constructor(contactPerson, legalEntityController, $mdDialog) {
         this.legalEntityController = legalEntityController;
         this.$mdDialog = $mdDialog;  
         this.contactPerson = contactPerson; 
-        if(contactPerson === {}){
+        this.addMode = false;
+        if(_.isEmpty(contactPerson) === true){
             this.addMode = true;
         }
     }      

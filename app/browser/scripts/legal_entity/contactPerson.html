@@ -25,11 +25,11 @@
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>First Name</label>
-                    <input ng-model="_ctrl.contactPerson.FIRSTNAME" type="text">
+                    <input ng-model="_ctrl.contactPerson.FIRSTNAME" type="text" required>
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Last Name</label>
-                    <input ng-model="_ctrl.contactPerson.LASTNAME" type="text">
+                    <input ng-model="_ctrl.contactPerson.LASTNAME" type="text" required>
                 </md-input-container>
                 <md-input-container>
                     <label>Title</label>
@@ -56,7 +56,7 @@
             </div>
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
                 <!--md-button class="md-raised md-primary" ng-click="_ctrl.addContactPerson()">Add</md-button-->    
-                <md-button class="md-raised md-primary" ng-click="_ctrl.saveContactPerson()">Save</md-button>                             
+                <md-button class="md-raised md-primary" ng-click="_ctrl.saveContactPerson()" ng-disabled="contactPersonForm.$invalid">Save</md-button>                             
             </section>  
         </div>
     </md-dialog-content>

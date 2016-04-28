@@ -91,7 +91,10 @@ class LegalEntityService {
     updateLegalEntity(legalEntity) {
         let deferred = this.$q.defer();
         this.legalEntities.update({_id: legalEntity._id}, legalEntity, {}, function (err, numReplaced) {
-            if (err) deferred.reject(err);
+            if (err) { 
+                deferred.reject(err);
+                console.log(err);
+            }
             deferred.resolve(numReplaced);
         });
         return deferred.promise;
