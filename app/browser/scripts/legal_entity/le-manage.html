@@ -81,6 +81,22 @@
                             <input ng-model="_ctrl.selected.CONTACT_ADDRESS.COUNTRY.VALUE_DECODE" type="text">
                         </md-input-container>
                     </div>
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                            <h2>Other Name</h2>
+                            <span flex></span>
+                                <md-button class="md-icon-button" ng-click="_ctrl.showOtherDiag({}, $event)">
+                                <md-icon class="material-icons" aria-label="Add Other Name">note_add</md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-list>
+                        <md-list-item ng-repeat=" otherName in _ctrl.selected.OTHER_NAME track by $index" ng-click="_ctrl.showOtherNameDiag(otherName, $event)" class="noright">
+                            <md-icon class="material-icons" aria-label="Person">note</md-icon>
+                            <p>{{ otherName }}</p>         
+                            <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteOtherName(otherName, $event)">Delete</md-button>                                                          
+                        </md-list-item>
+                    </md-list>
                     
                     <md-toolbar>
                         <div class="md-toolbar-tools">

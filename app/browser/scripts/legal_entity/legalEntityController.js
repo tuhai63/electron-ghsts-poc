@@ -122,9 +122,9 @@ class LegalEntityController {
         })
     }
     
-    saveContactPerson(person, addMode){
+    saveContactPerson(person, isAddMode){
         // save the person to the selected legal entity.
-        if(addMode === true){
+        if(isAddMode === true){
             // this is a new person
             this.selected.CONTACT_PERSON.push(person);
         } 

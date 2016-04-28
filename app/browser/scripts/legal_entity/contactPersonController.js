@@ -6,7 +6,7 @@ class ContactPersonController {
         this.legalEntityController = legalEntityController;
         this.$mdDialog = $mdDialog;  
         this.contactPerson = contactPerson; 
-        this.addMode = false;
+        this.isAddMode = false;
         if(_.isEmpty(contactPerson) === true){
             this.addMode = true;
         }
@@ -17,7 +17,7 @@ class ContactPersonController {
     };    
 
     saveContactPerson($event) {
-        this.legalEntityController.saveContactPerson(this.contactPerson, this.addMode);  
+        this.legalEntityController.saveContactPerson(this.contactPerson, this.isAddMode);  
         this.$mdDialog.hide();
     } 
 }
