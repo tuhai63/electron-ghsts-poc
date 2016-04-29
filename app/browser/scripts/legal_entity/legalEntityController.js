@@ -88,6 +88,50 @@ class LegalEntityController {
                 this.selected = legalEntities[0];
             });
         }
+    }   
+     
+    addOtherName(){
+        this.selected.OTHER_NAME.push('Other Name');
+    }
+    
+    deleteOtherName(otherName, $event){
+        let confirm = this.$mdDialog.confirm()
+                                .title('Are you sure?')
+                                .content('Are you sure you want to delete this Other Name?')
+                                .ok('Yes')
+                                .cancel('No')
+                                .targetEvent($event);
+        
+        this.$mdDialog.show(confirm).then(() => {
+            let self = this;
+            // delete the specific other name 
+            _.pull(this.selected.OTHER_NAME, otherName );
+            // update the legal entity            
+            this.legalEntityService.updateLegalEntity(this.selected);
+        });     
+    }
+    
+    deleteOtherName(otherName, $event){
+        let confirm = this.$mdDialog.confirm()
+                                .title('Are you sure?')
+                                .content('Are you sure you want to delete this Other Name?')
+                                .ok('Yes')
+                                .cancel('No')
+                                .targetEvent($event);
+        
+        this.$mdDialog.show(confirm).then(() => {
+            let self = this;
+            // delete the specific other name 
+            _.pull(this.selected.OTHER_NAME, otherName );
+            // update the legal entity            
+            this.legalEntityService.updateLegalEntity(this.selected);
+        });     
+    }
+    
+    addIdentifier(){
+        let IdType = new ValueStruct("DUNS-number", "DUNS-number"); 
+        let identifier = new LegalEntityIdentifier(IdType, "DUNS00001")
+        this.selected.LEGALENTITY_IDENTIFIER.push(identifier);
     }
     
     deleteContactPerson(person, $event){
@@ -105,7 +149,7 @@ class LegalEntityController {
             // update the legal entity            
             this.legalEntityService.updateLegalEntity(this.selected);
         });        
-    }    
+    }   
     
     showContactPersonDiag(person, $event) {
         this.$mdDialog.show( {
@@ -131,7 +175,8 @@ class LegalEntityController {
         // save the new or modified contact person by updating the legal entity            
         this.legalEntityService.updateLegalEntity(this.selected);
     }
-    
+        
+    // test/debug functions
     viewLegalEntityJson($event) {
         let self = this;
         if (this.selected != null && this.selected._id != null) {
