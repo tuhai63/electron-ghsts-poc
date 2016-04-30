@@ -8,7 +8,7 @@ class ContactPersonController {
         this.contactPerson = contactPerson; 
         this.isAddMode = false;
         if(_.isEmpty(contactPerson) === true){
-            this.addMode = true;
+            this.isAddMode = true;
         }
     }      
   
