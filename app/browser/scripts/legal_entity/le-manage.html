@@ -93,10 +93,15 @@
                     </md-toolbar>
                     <md-list>
                         <md-list-item ng-repeat="id in _ctrl.selected.LEGALENTITY_IDENTIFIER track by $index" class="noright">
-                            <md-icon class="material-icons" aria-label="Identifier">note</md-icon>
-                            <p>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <md-icon class="material-icons" aria-label="Other Name">note</md-icon> 
+                                <label>Identifer</label>
                                 <input ng-model="_ctrl.selected.LEGALENTITY_IDENTIFIER[$index].IDENTIFIER" type="text">
-                            </p>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <md-icon class="material-icons" aria-label="Other Name">note</md-icon> 
+                                <input ng-model="_ctrl.selected.LEGALENTITY_IDENTIFIER[$index].IDENTIFIER" type="text">
+                            </md-input-container>
                             <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteIdentifier(id, $event)">Delete</md-button>                                                          
                         </md-list-item>
                     </md-list>
@@ -111,26 +116,26 @@
                         </div>
                     </md-toolbar>
                     <md-list>
-                        <md-list-item ng-repeat=" otherName in _ctrl.selected.OTHER_NAME track by $index" class="noright">
-                            <div layout-gt-sm="row">
-                            <!--md-icon class="material-icons" aria-label="Other Name">note</md-icon-->                            
-                                <md-input-container class="md-block" flex-gt-sm>
+                        <md-list-item ng-repeat="otherName in _ctrl.selected.OTHER_NAME track by $index" class="noright">
+                                <md-input-container class="md-block" flex="80">
+                                    <!--md-icon class="material-icons" aria-label="Other Name">note</md-icon--> 
+                                    <label>Other Name</label>
                                     <input ng-model="_ctrl.selected.OTHER_NAME[$index]" type="text">
                                 </md-input-container>
-                                <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteOtherName(otherName, $event)">Delete</md-button>  
-                            </div>                                                                                 
+                                <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteOtherName(otherName, $event)">Delete</md-button> 
                         </md-list-item>
                     </md-list>
                     
-                    <div layout-gt-sm="row" ng-repeat=" otherName in _ctrl.selected.OTHER_NAME track by $index">
-                        <!--md-icon class="material-icons" aria-label="Other Name">note</md-icon--> 
+                    <!--div layout-gt-sm="row" ng-repeat="otherName in _ctrl.selected.OTHER_NAME track by $index">                        
                         <md-input-container class="md-block" flex-gt-sm>
-                            <input ng-model="_ctrl.selected.OTHER_NAME[$index]" type="text">
+                            <md-icon class="material-icons" aria-label="Other Name">note</md-icon> 
+                            <input ng-model="_ctrl.selected.OTHER_NAME[$index]" type="text">                            
                         </md-input-container>
+                        <span flex></span>                        
                         <md-input-container class="md-block" flex-gt-sm>
                             <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteOtherName(otherName, $event)">Delete</md-button>
                         </md-input-container> 
-                    </div>   
+                    </div-->   
                     
                     <md-toolbar>
                         <div class="md-toolbar-tools">
