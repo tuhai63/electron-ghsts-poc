@@ -84,7 +84,7 @@
                     
                     <md-toolbar>
                         <div class="md-toolbar-tools">
-                            <h2>Identifier</h2>
+                            <h2>Identifiers</h2>
                             <span flex></span>
                                 <md-button class="md-icon-button" ng-click="_ctrl.addIdentifier()">
                                 <md-icon class="material-icons" aria-label="Add Identifier">note_add</md-icon>
@@ -92,23 +92,32 @@
                         </div>
                     </md-toolbar>
                     <md-list>
-                        <md-list-item ng-repeat="id in _ctrl.selected.LEGALENTITY_IDENTIFIER track by $index" class="noright">
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <md-icon class="material-icons" aria-label="Other Name">note</md-icon> 
-                                <label>Identifer</label>
-                                <input ng-model="_ctrl.selected.LEGALENTITY_IDENTIFIER[$index].IDENTIFIER" type="text">
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <md-icon class="material-icons" aria-label="Other Name">note</md-icon> 
-                                <input ng-model="_ctrl.selected.LEGALENTITY_IDENTIFIER[$index].IDENTIFIER" type="text">
-                            </md-input-container>
-                            <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteIdentifier(id, $event)">Delete</md-button>                                                          
+                        <md-list-item ng-repeat="leId in _ctrl.selected.LEGALENTITY_IDENTIFIER track by $index" class="noright">
+                            <div layout-gt-sm="row" flex-gt-sm>
+                                <md-input-container class="md-block">
+                                    <label>Identifer</label>
+                                    <input ng-model="leId.IDENTIFIER" type="text">
+                                </md-input-container>
+                                <md-input-container class="md-block">
+                                    <label>Type</label>
+                                    <md-select name="repeatSelectIdType" id="repeatSelectIdType" 
+                                                ng-model="leId.LEGALENTITY_IDENTIFIER_TYPE.VALUE"
+                                                ng-change="_ctrl.updateIdTypeDecodeByIdentifierIndex($index)">
+                                        <md-option ng-repeat="idType in _ctrl.identifierTypeOptions" value="{{idType}}" ng-selected="{{leId.LEGALENTITY_IDENTIFIER_TYPE.VALUE == idType}}">{{ idType }}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <!--md-input-container class="md-block">
+                                    <label>Type Code</label>
+                                    <input ng-model="_ctrl.selected.LEGALENTITY_IDENTIFIER[$index].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE" type="text">
+                                </md-input-container-->
+                                <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteIdentifier(id, $event)">Delete</md-button>
+                            </div>                                                          
                         </md-list-item>
                     </md-list>
                     
                     <md-toolbar>
                         <div class="md-toolbar-tools">
-                            <h2>Other Name</h2>
+                            <h2>Other Names</h2>
                             <span flex></span>
                                 <md-button class="md-icon-button" ng-click="_ctrl.addOtherName()">
                                 <md-icon class="material-icons" aria-label="Add Other Name">note_add</md-icon>
@@ -117,12 +126,12 @@
                     </md-toolbar>
                     <md-list>
                         <md-list-item ng-repeat="otherName in _ctrl.selected.OTHER_NAME track by $index" class="noright">
-                                <md-input-container class="md-block" flex="80">
-                                    <!--md-icon class="material-icons" aria-label="Other Name">note</md-icon--> 
-                                    <label>Other Name</label>
-                                    <input ng-model="_ctrl.selected.OTHER_NAME[$index]" type="text">
-                                </md-input-container>
-                                <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteOtherName(otherName, $event)">Delete</md-button> 
+                            <md-input-container class="md-block" flex="80">
+                                <!--md-icon class="material-icons" aria-label="Other Name">note</md-icon--> 
+                                <label>Other Name</label>
+                                <input ng-model="_ctrl.selected.OTHER_NAME[$index]" type="text">
+                            </md-input-container>
+                            <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteOtherName(otherName, $event)">Delete</md-button> 
                         </md-list-item>
                     </md-list>
                     
@@ -139,7 +148,7 @@
                     
                     <md-toolbar>
                         <div class="md-toolbar-tools">
-                            <h2>Contact Person</h2>
+                            <h2>Contact Persons</h2>
                             <span flex></span>
                                 <md-button class="md-icon-button" ng-click="_ctrl.showContactPersonDiag({}, $event)">
                                 <md-icon class="material-icons" aria-label="Add Person">person_add</md-icon>

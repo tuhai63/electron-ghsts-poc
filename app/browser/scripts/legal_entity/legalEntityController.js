@@ -1,5 +1,7 @@
 import angular from 'angular';
-import {ContactPersonController} from './contactPersonController.js';
+import {ContactPersonController} from './contactPersonController';
+import {ValueStruct} from '../common/sharedModel';
+import {LegalEntityIdentifier} from './legalEntityModel';
 import {_} from 'lodash';
 
 class LegalEntityController {
@@ -10,11 +12,20 @@ class LegalEntityController {
         this.legalEntities = [];
         this.selectedIndex = 0;
         this.filterText = null;
+        // options for identifier type
+        this.identifierTypeOptions = ['DUNS-number', 'REACH', 'SAP','VAT-number', 'other'];  
                 
         // Load initial data
         this.getAllLegalEntities();
     }      
   
+    updateIdTypeDecodeByIdentifierIndex(identiferIndex){
+        // update identifer type value decode by identifier index
+        let selectedTypeValue = this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE;
+        // at this moment, value and value_decode are the same.
+        this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE = selectedTypeValue;
+    }
+   
     selectLegalEntity(legalEntity, index) {
         this.selected = angular.isNumber(legalEntity) ? this.legalEntities[legalEntity] : legalEntity;
         this.selectedIndex = angular.isNumber(legalEntity) ? legalEntity: index;
@@ -91,7 +102,7 @@ class LegalEntityController {
     }   
      
     addOtherName(){
-        this.selected.OTHER_NAME.push('Other Name');
+        this.selected.OTHER_NAME.push('');
     }
     
     deleteOtherName(otherName, $event){
@@ -130,7 +141,7 @@ class LegalEntityController {
     
     addIdentifier(){
         let IdType = new ValueStruct("DUNS-number", "DUNS-number"); 
-        let identifier = new LegalEntityIdentifier(IdType, "DUNS00001")
+        let identifier = new LegalEntityIdentifier(IdType, "")
         this.selected.LEGALENTITY_IDENTIFIER.push(identifier);
     }
     
