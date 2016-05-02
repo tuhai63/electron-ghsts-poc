@@ -48,8 +48,13 @@ class LegalEntityController {
   
     updateIdTypeDecodeByIdentifierIndex(identiferIndex){
         // update identifer type value decode by identifier index upon selection change
-        let selectedTypeDecode = this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE;
-        this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE = selectedTypeDecode;
+        let selectedTypeValue = this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE;
+        // find value decode from identifierTypeOptions 
+        let idTypeValueDecode = _(this.identifierTypeOptions)
+                                        .filter(c => c.VALUE == selectedTypeValue)
+                                        .map(c => c.VALUE_DECODE)
+                                        .value()[0];
+        this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE = idTypeValueDecode;
     }
    
     selectLegalEntity(legalEntity, index) {
