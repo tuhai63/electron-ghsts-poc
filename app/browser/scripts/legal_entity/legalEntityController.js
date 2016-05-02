@@ -5,25 +5,51 @@ import {LegalEntityIdentifier} from './legalEntityModel';
 import {_} from 'lodash';
 
 class LegalEntityController {
-    constructor($mdDialog, LegalEntityService) {
+    constructor($mdDialog, LegalEntityService, PickListService) {
         this.legalEntityService = LegalEntityService;
+        this.pickListService = PickListService;
         this.$mdDialog = $mdDialog;        
         this.selected = null;
         this.legalEntities = [];
         this.selectedIndex = 0;
         this.filterText = null;
-        // options for identifier type
-        this.identifierTypeOptions = ['DUNS-number', 'REACH', 'SAP','VAT-number', 'other'];  
-                
+        
+        // options for identifier types
+        this.identifierTypeOptions = this.pickListService.getLegalEntityIdentifierTypeOptions(); 
+        // options for countries
+        this.countryOptions = this.pickListService.getCountryOptions();
+        // options for legal entity types
+        this.legalEntityTypeOptions = this.pickListService.getLegalEntityTypeOptions();
         // Load initial data
         this.getAllLegalEntities();
     }      
   
+    updateSelectedLETypeDecode(){
+        // update legal entity type value decode upon selection change
+        let selectedLETypeValue = this.selected.LEGALENTITY_TYPE.VALUE;
+        // find the value decode in the legal entity type options
+        let leTypeValueDecode = _(this.legalEntityTypeOptions)
+                                        .filter(c => c.VALUE == selectedLETypeValue)
+                                        .map(c => c.VALUE_DECODE)
+                                        .value()[0];
+        this.selected.LEGALENTITY_TYPE.VALUE_DECODE = leTypeValueDecode;
+    }
+    
+    updateSelectedCountryDecode(){
+        // update country value decode for the selected country upon selection change
+        let selectedCountryValue = this.selected.CONTACT_ADDRESS.COUNTRY.VALUE;
+        // find the value decode in the country options
+        let countryValueDecode = _(this.countryOptions)
+                                        .filter(c => c.VALUE == selectedCountryValue)
+                                        .map(c => c.VALUE_DECODE)
+                                        .value()[0];
+        this.selected.CONTACT_ADDRESS.COUNTRY.VALUE_DECODE = countryValueDecode;
+    }
+  
     updateIdTypeDecodeByIdentifierIndex(identiferIndex){
-        // update identifer type value decode by identifier index
-        let selectedTypeValue = this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE;
-        // at this moment, value and value_decode are the same.
-        this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE = selectedTypeValue;
+        // update identifer type value decode by identifier index upon selection change
+        let selectedTypeDecode = this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE;
+        this.selected.LEGALENTITY_IDENTIFIER[identiferIndex].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE = selectedTypeDecode;
     }
    
     selectLegalEntity(legalEntity, index) {
@@ -145,6 +171,23 @@ class LegalEntityController {
         this.selected.LEGALENTITY_IDENTIFIER.push(identifier);
     }
     
+    deleteIdentifier(identifier, $event){
+        let confirm = this.$mdDialog.confirm()
+                                .title('Are you sure?')
+                                .content('Are you sure you want to delete this Identifier?')
+                                .ok('Yes')
+                                .cancel('No')
+                                .targetEvent($event);
+        
+        this.$mdDialog.show(confirm).then(() => {
+            let self = this;
+            // delete the specific identifier
+            _.remove(this.selected.LEGALENTITY_IDENTIFIER, { IDENTIFIER: identifier });
+            // update the legal entity            
+            this.legalEntityService.updateLegalEntity(this.selected);
+        });             
+    }
+    
     deleteContactPerson(person, $event){
         let confirm = this.$mdDialog.confirm()
                                 .title('Are you sure?')
@@ -232,7 +275,7 @@ class LegalEntityController {
     }
 }
 
-LegalEntityController.$inject = ['$mdDialog', 'legalEntityService'];
+LegalEntityController.$inject = ['$mdDialog', 'legalEntityService', 'pickListService'];
 
 export { LegalEntityController }
 

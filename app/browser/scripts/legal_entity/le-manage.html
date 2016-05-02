@@ -51,8 +51,10 @@
                     <div layout-gt-sm="row">
                         <md-input-container>
                             <label>Type</label>
-                            <input ng-model="_ctrl.selected.LEGALENTITY_TYPE.VALUE" type="text">
-                        </md-input-container>                        
+                            <md-select name="repeatSelectLEType" id="repeatSelectLEType" ng-model="_ctrl.selected.LEGALENTITY_TYPE.VALUE" ng-change="_ctrl.updateSelectedLETypeDecode()">
+                               <md-option ng-repeat="leType in _ctrl.legalEntityTypeOptions" value="{{leType.VALUE}}" ng-selected="{{_ctrl.selected.LEGALENTITY_TYPE.VALUE == leType.VALUE}}">{{ leType.VALUE_DECODE }}</md-option>
+                            </md-select>                                    
+                        </md-input-container>      
                         <md-input-container>
                             <label>Status</label>
                             <input ng-model="_ctrl.selected.METADATA_STATUS.VALUE" type="text">
@@ -78,7 +80,9 @@
                         </md-input-container>
                         <md-input-container>
                             <label>Country</label>
-                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.COUNTRY.VALUE_DECODE" type="text">
+                            <md-select name="repeatSelectCountry" id="repeatSelectCountry" ng-model="_ctrl.selected.CONTACT_ADDRESS.COUNTRY.VALUE" ng-change="_ctrl.updateSelectedCountryDecode()">
+                               <md-option ng-repeat="country in _ctrl.countryOptions" value="{{country.VALUE}}" ng-selected="{{_ctrl.selected.CONTACT_ADDRESS.COUNTRY.VALUE == country.VALUE}}">{{ country.VALUE_DECODE }}</md-option>
+                            </md-select>                                    
                         </md-input-container>
                     </div>
                     
@@ -103,14 +107,14 @@
                                     <md-select name="repeatSelectIdType" id="repeatSelectIdType" 
                                                 ng-model="leId.LEGALENTITY_IDENTIFIER_TYPE.VALUE"
                                                 ng-change="_ctrl.updateIdTypeDecodeByIdentifierIndex($index)">
-                                        <md-option ng-repeat="idType in _ctrl.identifierTypeOptions" value="{{idType}}" ng-selected="{{leId.LEGALENTITY_IDENTIFIER_TYPE.VALUE == idType}}">{{ idType }}</md-option>
-                                    </md-select>
+                                        <md-option ng-repeat="idType in _ctrl.identifierTypeOptions" value="{{idType.VALUE}}" ng-selected="{{leId.LEGALENTITY_IDENTIFIER_TYPE.VALUE == idType.VALUE}}">{{ idType.VALUE_DECODE }}</md-option>
+                                    </md-select>                                    
                                 </md-input-container>
                                 <!--md-input-container class="md-block">
                                     <label>Type Code</label>
                                     <input ng-model="_ctrl.selected.LEGALENTITY_IDENTIFIER[$index].LEGALENTITY_IDENTIFIER_TYPE.VALUE_DECODE" type="text">
                                 </md-input-container-->
-                                <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteIdentifier(id, $event)">Delete</md-button>
+                                <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteIdentifier(leId.IDENTIFIER, $event)">Delete</md-button>
                             </div>                                                          
                         </md-list-item>
                     </md-list>
