@@ -1,4 +1,6 @@
 import angular from 'angular';
+import {ContactPersonController} from './contactPersonController.js';
+import {_} from 'lodash';
 
 class LegalEntityController {
     constructor($mdDialog, LegalEntityService) {
@@ -86,6 +88,48 @@ class LegalEntityController {
                 this.selected = legalEntities[0];
             });
         }
+    }
+    
+    deleteContactPerson(person, $event){
+        let confirm = this.$mdDialog.confirm()
+                                .title('Are you sure?')
+                                .content('Are you sure you want to delete this Contact Person?')
+                                .ok('Yes')
+                                .cancel('No')
+                                .targetEvent($event);
+        
+        this.$mdDialog.show(confirm).then(() => {
+            let self = this;
+            // delete the contact person by matching first and last names
+            _.remove(this.selected.CONTACT_PERSON, { FIRSTNAME: person.FIRSTNAME, LASTNAME:  person.LASTNAME });
+            // update the legal entity            
+            this.legalEntityService.updateLegalEntity(this.selected);
+        });        
+    }    
+    
+    showContactPersonDiag(person, $event) {
+        this.$mdDialog.show( {
+            controller: ContactPersonController,
+            controllerAs: '_ctrl',
+            templateUrl: './scripts/legal_entity/contactPerson.html',
+            parent: angular.element(document.body),
+            targetEvent: $event,
+            clickOutsideToClose: false,
+            locals: {
+                contactPerson: person,
+                legalEntityController: this
+            }
+        })
+    }
+    
+    saveContactPerson(person, addMode){
+        // save the person to the selected legal entity.
+        if(addMode === true){
+            // this is a new person
+            this.selected.CONTACT_PERSON.push(person);
+        } 
+        // save the new or modified contact person by updating the legal entity            
+        this.legalEntityService.updateLegalEntity(this.selected);
     }
     
     viewLegalEntityJson($event) {

@@ -18,6 +18,8 @@
             <md-list>
                 <!-- notice work around for nedb. 'track by index'' to fix $$hashkey problem -->                
                 <md-list-item ng-repeat="it in _ctrl.legalEntities track by $index" ng-click="_ctrl.selectLegalEntity(it, $index)">
+                    <!--md-icon class="material-icons" aria-label="Legal Entity" ng-show="it.LEGALENTITY_TYPE.VALUE != 'Regulatory Authority'">business</md-icon-->
+                    <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon>                    
                     <p>{{it.LEGALENTITY_NAME}}</p>
                 </md-list-item>
             </md-list>
@@ -79,10 +81,27 @@
                             <input ng-model="_ctrl.selected.CONTACT_ADDRESS.COUNTRY.VALUE_DECODE" type="text">
                         </md-input-container>
                     </div>
+                    
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                            <h2>Contact Person</h2>
+                            <span flex></span>
+                                <md-button class="md-icon-button" ng-click="_ctrl.showContactPersonDiag({}, $event)">
+                                <md-icon class="material-icons" aria-label="Add Person">person_add</md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-list>
+                        <md-list-item ng-repeat=" person in _ctrl.selected.CONTACT_PERSON track by $index" ng-click="_ctrl.showContactPersonDiag(person, $event)" class="noright">
+                            <md-icon class="material-icons" aria-label="Person">person</md-icon>
+                            <p>{{ person.FIRSTNAME + ' ' + person.LASTNAME }}</p>         
+                            <md-button class="md-secondary md-raised md-warn" ng-click="_ctrl.deleteContactPerson(person, $event)">Delete</md-button>                                                          
+                        </md-list-item>
+                    </md-list>
                 </form>
             </md-content>
-            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <!--d-button class="md-raised md-info" ng-click="_ctrl.createLegalEntity()">Add</md-button-->
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>     
+                <!--md-button class="md-raised md-info" ng-click="_ctrl.createLegalEntity()">Add</md-button-->
                 <md-button class="md-raised md-primary" ng-click="_ctrl.saveLegalEntity()">Save</md-button>
                 <md-button class="md-raised md-danger" ng-click="_ctrl.cancelEdit()">Cancel</md-button>
                 <md-button class="md-raised md-warn" ng-click="_ctrl.deleteLegalEntity()">Delete</md-button>      
