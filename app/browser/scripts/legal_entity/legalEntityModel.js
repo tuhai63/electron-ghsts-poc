@@ -7,8 +7,8 @@ class LegalEntityIdentifier {
 }
 
 class ContactPerson {
-    constructor(organization, department, title, firstName, lastName, phone, mobile, fax, email){    
-        this.ORGANIZATION = organization;
+    constructor(organisation, department, title, firstName, lastName, phone, mobile, fax, email){    
+        this.ORGANISATION = organisation;
         this.DEPARTMENT = department;
         this.TITLE = title;
         this.FIRSTNAME = firstName;

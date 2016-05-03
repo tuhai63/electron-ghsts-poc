@@ -5,6 +5,14 @@ class PickListService {
     constructor() {
     }
 
+    getMetadataStatusOptions() {
+        return [
+            {VALUE_DECODE: "New", VALUE: "New"},		 	
+		 	{VALUE_DECODE: "No Change", VALUE: "No Change"},
+		 	{VALUE_DECODE: "Modified", VALUE: "Modified"}
+        ];
+    }
+    
     getLegalEntityIdentifierTypeOptions() {
         return [
             {VALUE_DECODE: "DUNS-number", VALUE: "DUNS-number"},		 	

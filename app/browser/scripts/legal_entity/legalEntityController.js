@@ -14,16 +14,30 @@ class LegalEntityController {
         this.selectedIndex = 0;
         this.filterText = null;
         
+        // options for metadata status
+        this.metadataStatusOptions = this.pickListService.getMetadataStatusOptions();
         // options for identifier types
         this.identifierTypeOptions = this.pickListService.getLegalEntityIdentifierTypeOptions(); 
         // options for countries
         this.countryOptions = this.pickListService.getCountryOptions();
         // options for legal entity types
         this.legalEntityTypeOptions = this.pickListService.getLegalEntityTypeOptions();
+        
         // Load initial data
         this.getAllLegalEntities();
     }      
   
+    updateSelectedStatusDecode(){
+        // update metadata status value decode upon selection change
+        let selectedStatusValue = this.selected.METADATA_STATUS.VALUE;
+        // find the value decode in themetadata status options
+        let leStatusValueDecode = _(this.metadataStatusOptions)
+                                        .filter(c => c.VALUE == selectedStatusValue)
+                                        .map(c => c.VALUE_DECODE)
+                                        .value()[0];
+        this.selected.METADATA_STATUS.VALUE_DECODE = leStatusValueDecode;
+    }
+    
     updateSelectedLETypeDecode(){
         // update legal entity type value decode upon selection change
         let selectedLETypeValue = this.selected.LEGALENTITY_TYPE.VALUE;
