@@ -1,7 +1,8 @@
 import angular from 'angular';
 import {ContactPersonController} from './contactPersonController';
 import {ValueStruct} from '../common/sharedModel';
-import {LegalEntityIdentifier} from './legalEntityModel';
+import {LegalEntityIdentifier, LegalEntity} from './legalEntityModel';
+import uuid from 'node-uuid';
 import {_} from 'lodash';
 
 class LegalEntityController {
@@ -122,8 +123,11 @@ class LegalEntityController {
     }
     
     createLegalEntity() {
-        this.selected = {};
+        this.selected = new LegalEntity();
+        this.selected.LEGALENTITY_PID = 'urn:' + uuid.v4(); 
         this.selectedIndex = null;
+        
+        
     }
     
     getAllLegalEntities() {
