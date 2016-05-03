@@ -7,8 +7,8 @@ class LegalEntityIdentifier {
 }
 
 class ContactPerson {
-    constructor(organization, department, title, firstName, lastName, phone, mobile, fax, email){    
-        this.ORGANIZATION = organization;
+    constructor(organisation, department, title, firstName, lastName, phone, mobile, fax, email){    
+        this.ORGANISATION = organisation;
         this.DEPARTMENT = department;
         this.TITLE = title;
         this.FIRSTNAME = firstName;
@@ -42,14 +42,14 @@ class LegalEntity {
             Object.assign(this, json);
         }else{          
             this._identifier = null;            
-            this.METADATA_STATUS = {};         // of ValueStruct
+            this.METADATA_STATUS = {};              // of ValueStruct
             this.LEGALENTITY_PID = null;
             this.LEGALENTITY_NAME = null;
-            this.LEGALENTITY_TYPE = {};          // of ValueStruct
+            this.LEGALENTITY_TYPE = {};             // of ValueStruct
             this.OTHER_NAME = [];
-            this.LEGALENTITY_IDENTIFIER = [];      // of IdentifierStruct
-            this.CONTACT_PERSON = [];              // list of ContactPerson     
-            this.CONTACT_ADDRESS = {};             // of ContactAddress   
+            this.LEGALENTITY_IDENTIFIER = [];       // list of LegalEntityIdentifier
+            this.CONTACT_PERSON = [];               // list of ContactPerson     
+            this.CONTACT_ADDRESS = {};              // of ContactAddress   
         }     
     }
     
