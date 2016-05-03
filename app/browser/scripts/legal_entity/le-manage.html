@@ -10,7 +10,7 @@
                     <h2>
                         <span>Legal Entity Management</span>
                     </h2>
-                </div>
+                </div>                
             </md-toolbar>
             <md-input-container style="margin-bottom:0">
                 <label>Legal Entity</label>
@@ -32,24 +32,20 @@
                     <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon> 
                     </md-button>
                     <h2> {{ _ctrl.selected.LEGALENTITY_NAME }}</h2>                            
-                 </div>
+                 </div>                
             </md-toolbar>            
                          
             <md-content layout-padding class="autoScroll">
                 <form name = "leForm">
                     <div layout-gt-xs="row">
-                        <md-input-container class="md-block" flex="30">                        
+                        <md-input-container class="md-block" flex-gt-sm>                    
                             <label>Identifier</label>
                             <input ng-model="_ctrl.selected._identifier">
-                        </md-input-container>
-                        <!--md-input-container class="md-block" flex-gt-sm>
+                        </md-input-container>                        
+                        <md-input-container class="md-block" flex-gt-sm>
                             <label>PID</label>
                             <input ng-model="_ctrl.selected.LEGALENTITY_PID" type="text" ng-required="false">
-                        </md-input-container-->
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Web Site</label>
-                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.WEBSITE" type="text">
-                        </md-input-container> 
+                        </md-input-container>                        
                     </div>
                     <div layout-gt-sm="row">
                         <md-input-container  class="md-block" flex-gt-sm>
@@ -95,6 +91,28 @@
                         </md-input-container>
                     </div>
                     
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Phone</label>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.PHONE" type="text">
+                        </md-input-container> 
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Fax</label>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.FAX" type="text">
+                        </md-input-container> 
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Email</label>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.EMAIL" type="text">
+                        </md-input-container>                          
+                    </div>
+                    
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Web Site</label>
+                            <input ng-model="_ctrl.selected.CONTACT_ADDRESS.WEBSITE" type="text">
+                        </md-input-container>
+                    </div>
+                        
                     <md-toolbar>
                         <div class="md-toolbar-tools">
                             <h2>Identifiers</h2>
