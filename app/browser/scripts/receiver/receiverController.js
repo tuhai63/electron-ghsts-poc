@@ -23,6 +23,14 @@ class ReceiverController {
         this.getAllReceivers();
     }      
   
+    addSender(){
+        this.selected.SENDER.push(new Sender());                
+    }
+    
+    deleteSender(toLegalEntityId){
+        
+    }
+    
     selectReceiver(receiver, index) {
         this.selected = angular.isNumber(receiver) ? this.receivers[receiver] : receiver;
         this.selectedIndex = angular.isNumber(receiver) ? receiver: index;

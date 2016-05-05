@@ -104,10 +104,12 @@ class ReceiverService {
                 receiver.ROLE = rcvr.ROLE[0];
                 receiver.SHORT_NAME = rcvr.SHORT_NAME[0];
 
-                receiver.SENDER = new Sender();
-                receiver.SENDER.toLegalEntityId = rcvr.SENDER[0].attr$.To_Legal_Entity_Id,
-                receiver.SENDER.COMPANY_CONTACT_REGULATORY_ROLE = rcvr.SENDER[0].COMPANY_CONTACT_REGULATORY_ROLE[0],
-                receiver.SENDER.REMARK =  (rcvr.SENDER[0].REMARK[0] === undefined ? null : rcvr.SENDER[0].REMARK[0]);                
+                let sender = new Sender();
+                // the sample only has one sender in each receiver 
+                sender.toLegalEntityId = rcvr.SENDER[0].attr$.To_Legal_Entity_Id,
+                sender.COMPANY_CONTACT_REGULATORY_ROLE = rcvr.SENDER[0].COMPANY_CONTACT_REGULATORY_ROLE[0],
+                sender.REMARK =  (rcvr.SENDER[0].REMARK[0] === undefined ? null : rcvr.SENDER[0].REMARK[0]);
+                receiver.addSender(sender);                
 
                 console.log('---------------------JSON Model----------------\n' + JSON.stringify(receiver));
                 console.log('------------------------GHSTS Format--------------------\n' + JSON.stringify(receiver.toGHSTSJson()));
@@ -133,7 +135,7 @@ class ReceiverService {
         sender.COMPANY_CONTACT_REGULATORY_ROLE = 'Sender';
         sender.REMARK = 'Kanata Drug System';
         
-        rcvr.SENDER = sender;
+        rcvr.addSender(sender);
 
         console.log(JSON.stringify(rcvr));
         return rcvr;

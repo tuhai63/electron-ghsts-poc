@@ -126,8 +126,6 @@ class LegalEntityController {
         this.selected = new LegalEntity();
         this.selected.LEGALENTITY_PID = 'urn:' + uuid.v4(); 
         this.selectedIndex = null;
-        
-        
     }
     
     getAllLegalEntities() {
