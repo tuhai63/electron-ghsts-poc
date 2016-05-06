@@ -2,8 +2,8 @@ import Nedb from 'nedb';
 import xml2js from 'xml2js';
 import uuid from 'node-uuid';
 import {GHSTS} from '../common/ghsts.js'
-import {ContactPerson, ContactAddress, LegalEntity} from './legalEntityModel.js';
-import {ValueStruct, IdentifierStruct} from '../common/sharedModel.js'
+import {LegalEntityIdentifier, ContactPerson, ContactAddress, LegalEntity} from './legalEntityModel.js';
+import {ValueStruct} from '../common/sharedModel.js'
 
 class LegalEntityService {
     constructor($q) {        
@@ -91,12 +91,20 @@ class LegalEntityService {
     updateLegalEntity(legalEntity) {
         let deferred = this.$q.defer();
         this.legalEntities.update({_id: legalEntity._id}, legalEntity, {}, function (err, numReplaced) {
-            if (err) deferred.reject(err);
+            if (err) { 
+                deferred.reject(err);
+                console.log(err);
+            }
             deferred.resolve(numReplaced);
         });
         return deferred.promise;
     }
     
+    addContactPerson(contactPerson){
+        this.selected.CONTACT_PERSON.push(contactPerson);
+        updateLegalEntity(this.selected);
+    }
+
     // the following are demo related methods.  can be moved to a dedicated test class later    
     getLegalEntityGHSTSById(id) {
         // return GHSTS xml from legal entity json. 
@@ -137,7 +145,7 @@ class LegalEntityService {
                 legalEntity.LEGALENTITY_NAME = le.LEGALENTITY_NAME[0];    
                 legalEntity.LEGALENTITY_TYPE = type;    
                 //let IdType = new ValueStruct(le.COUNTRY[0].VALUE[0], le.COUNTRY[0].VALUE_DECODE[0]);
-                //let identifier = new IdentifierStruct('LEGALENTITY_IDENTIFIER_TYPE', IdType, "DUNS00001")
+                //let identifier = new LegalEntityIdentifier(IdType, "DUNS00001")
                 
                 legalEntity.CONTACT_ADDRESS = new ContactAddress(
                     le.CONTACT_ADDRESS[0].STREET1[0],
@@ -182,7 +190,7 @@ class LegalEntityService {
         // private method: create a sample legal entity as a sender
         let Canada = new ValueStruct('CA', 'Canada');
         let IdType = new ValueStruct("DUNS-number", "DUNS-number"); 
-        let identifier = new IdentifierStruct('LEGALENTITY_IDENTIFIER_TYPE', IdType, "DUNS00001")
+        let identifier = new LegalEntityIdentifier(IdType, "DUNS00001")
         let contactAddr = new ContactAddress('100 Heavenly Ave,', null, '12345', 'Ottawa', 'Ontario', Canada, '613-234-3444', '613-1233-2333', 'goodman@live.com', 'http://drugsys.com');
         let contactPerson = new ContactPerson('Ottawa Drug System', 'Drug Dept.', 'QPIC', 'James', 'Wong', '613-234-3444', '613-234-3444', '613-266-3444', 'jwong@live.com');
         let contactPerson1 = new ContactPerson('Ottawa Drug System', 'Drug Dept.', 'QPIC', 'Mary', 'Smith', '613-234-3445', '613-234-3445', '613-266-3445', 'msmith@live.com');  
@@ -209,7 +217,7 @@ class LegalEntityService {
         // create a sample legal entity as a regulatory authority
         let Canada = new ValueStruct('CA', 'Canada');
         let IdType = new ValueStruct("DUNS-number", "DUNS-number"); 
-        let identifierRA = new IdentifierStruct('LEGALENTITY_IDENTIFIER_TYPE', IdType, "DUNS50000")
+        let identifierRA = new LegalEntityIdentifier(IdType, "DUNS50000")
         let contactAddrRA = new ContactAddress('340 Legget Drive,', null, 'K3J 6Y3', 'Kanata', 'Ontario', Canada, '613-344-9000', '613-233-9800', 'hcguy@live.com', 'http://hc.gc.ca');
         let contactPersonRA = new ContactPerson('Health Canada', 'PMRA', 'Officer', 'Don', 'Welder', '613-344-2314', '613-344-5664', '613-344-9884', 'don.welder@gc.ca');
                      

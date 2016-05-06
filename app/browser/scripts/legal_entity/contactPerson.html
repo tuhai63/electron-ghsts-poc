@@ -1,0 +1,73 @@
+<md-dialog aria-label="Contact Person" ng-cloak>
+  <form name = "contactPersonForm">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button">
+                <md-icon class="material-icons" aria-label="Add Person">person</md-icon>
+            </md-button>
+            <h2>{{_ctrl.legalEntityController.selected.LEGALENTITY_NAME}} Contact Person</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="_ctrl.cancel()">
+                <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div layout-gt-sm="row">
+                <md-input-container  class="md-block" flex-gt-sm>
+                    <label>Organization</label>
+                    <input ng-model="_ctrl.contactPerson.ORGANISATION" type="text">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Department</label>
+                    <input ng-model="_ctrl.contactPerson.DEPARTMENT" type="text" ng-required="false">
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>First Name</label>
+                    <input name="firstName" ng-model="_ctrl.contactPerson.FIRSTNAME" type="text" required>
+                    <div ng-messages="contactPersonForm.firstName.$error">
+                        <div ng-message="required">First Name is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Last Name</label>
+                    <input name="lastName" ng-model="_ctrl.contactPerson.LASTNAME" type="text" required>
+                    <div ng-messages="contactPersonForm.lastName.$error">
+                        <div ng-message="required">Last Name is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Title</label>
+                    <input ng-model="_ctrl.contactPerson.TITLE" type="text">
+                </md-input-container>  
+            </div>     
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Phone</label>
+                    <input ng-model="_ctrl.contactPerson.PHONE" type="text">
+                </md-input-container>                        
+                <md-input-container>
+                    <label>Mobile</label>
+                    <input ng-model="_ctrl.contactPerson.MOBILE" type="text">
+                </md-input-container>
+                <md-input-container>
+                    <label>Fax</label>
+                    <input ng-model="_ctrl.contactPerson.FAX" type="text">
+                </md-input-container>
+                <md-input-container>
+                    <label>Email</label>
+                    <input ng-model="_ctrl.contactPerson.EMAIL" type="text">
+                </md-input-container>
+            </div>
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button class="md-raised md-primary" ng-click="_ctrl.cancel()">Cancel</md-button>    
+                <md-button class="md-raised md-primary" ng-click="_ctrl.saveContactPerson()" ng-disabled="contactPersonForm.$invalid">Save</md-button>                             
+            </section>  
+        </div>
+    </md-dialog-content>
+  </form>
+</md-dialog>
+

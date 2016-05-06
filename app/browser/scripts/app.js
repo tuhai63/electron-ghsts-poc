@@ -8,14 +8,16 @@ import {LegalEntityController} from './legal_entity/legalEntityController';
 import {ReceiverService} from './receiver/receiverService'; 
 import {ReceiverController} from './receiver/receiverController';
 import {GhstsService} from './ghsts_demo/ghstsService'; 
+import {PickListService} from './common/pickListService';
 import {GhstsController} from './ghsts_demo/ghstsController';
 // notice stylesheet loading from app.js
 import '../jspm_packages/github/angular/bower-material@1.0.4/angular-material.css!';
 
 angular.module('ghstsApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngMessages'])
     .config(config)
+    .service('pickListService', [PickListService])
     .service('legalEntityService', ['$q', LegalEntityService])
-    .controller('legalEntityController', ['$mdDialog', 'legalEntityService', LegalEntityController])
+    .controller('legalEntityController', ['$mdDialog', 'legalEntityService', 'pickListService', LegalEntityController])
     .service('receiverService', ['$q', ReceiverService])
     .controller('receiverController', ['$mdDialog', 'receiverService', 'legalEntityService', ReceiverController])
     .service('ghstsService', ['receiverService', 'legalEntityService', GhstsService])

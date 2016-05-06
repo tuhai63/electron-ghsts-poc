@@ -1,7 +1,7 @@
 import Nedb from 'nedb';
 import xml2js from 'xml2js';
 import {GHSTS} from '../common/ghsts.js'
-import {ValueStruct, IdentifierStruct} from '../common/sharedModel.js';
+import {ValueStruct} from '../common/sharedModel.js';
 import {Receiver, Sender} from './receiverModel.js'
 
 class ReceiverService {
