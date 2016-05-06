@@ -1,15 +1,16 @@
 <div style="width:100%" layout="column">
-    <md-toolbar class="md-whiteframe-z1" layout="row">
-        <md-button class="md-warn" aria-label="Home" ng-href="#/home">Home</md-button>
-        <h2>
-          <span>Receiver Management</span>
-        </h2>
-    </md-toolbar>
     <div style="width:100%" layout="row">
         <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
             <!--  md-is-locked-open="$mdMedia('gt-sm')"-->
-            <md-toolbar layout="row" class="md-whiteframe-z1">
-                <md-headline layout-padding>Receivers</md-headline>
+            <md-toolbar class="md-whiteframe-z1" layout="row">
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Home" ng-href="#/home">
+                        <md-icon class="material-icons" aria-label="Home">home</md-icon>    
+                    </md-button>
+                    <h2>
+                        <span>Receiver Management</span>
+                    </h2>
+                </div>                
             </md-toolbar>
             <md-input-container style="margin-bottom:0">
                 <label>Receiver</label>
@@ -18,6 +19,7 @@
             <md-list>
                 <!-- notice work around for nedb. 'track by index'' to fix $$hashkey problem -->                
                 <md-list-item ng-repeat="it in _ctrl.receivers track by $index" ng-click="_ctrl.selectReceiver(it, $index)">
+                    <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon>
                     <p>{{it.SHORT_NAME}}</p>
                 </md-list-item>
             </md-list>
@@ -25,17 +27,16 @@
 
         <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
             <md-toolbar layout="row" class="md-whiteframe-z1">
-                <md-headline layout-padding>{{ _ctrl.selected.SHORT_NAME }}</md-headline>
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Settings">
+                        <md-icon class="material-icons" aria-label="Receiver">business</md-icon> 
+                    </md-button>
+                    <h2>{{ _ctrl.selected.SHORT_NAME }}</h2>
+                </div>
             </md-toolbar>            
                          
             <md-content layout-padding class="autoScroll">
                 <form name = "recevierForm">
-                    <!--div layout-gt-xs="row">                        
-                        <md-input-container class="md-block" flex-gt-xs>                        
-                            <label>Identifier</label>
-                            <input ng-model="_ctrl.selected._identifier" readonly>
-                        </md-input-container>                        
-                    </div-->
                     <div layout-gt-sm="row">
                         <md-input-container class="md-block" flex-gt-sm> 
                             <label>Receiver Legal Entity Name</label>
@@ -70,6 +71,7 @@
                     </md-toolbar>
 
                     <div ng-repeat="sender in _ctrl.selected.SENDER track by $index" >
+                        <p/>
                         <div layout-gt-sm="row" flex-gt-sm>
                             <md-input-container class="md-block" flex-gt-sm> 
                                 <label>Sender Legal Entity Name</label>
@@ -92,20 +94,11 @@
                             <div layout-align="end">
                                 <md-input-container class="md-block" flex-gt-sm>
                                     <md-button class="md-secondary md-raised" ng-click="_ctrl.deleteSender(sender._toLegalEntityId, $event)">Delete</md-button>
+                                    <!--md-button class="md-raised md-primary" ng-click="_ctrl.getSenderLegalEntityByLEId(_ctrl.selected.SENDER._toLegalEntityId)">Get Sender LE</md-button-->
                                 </md-input-container>
                             </div>
                         </div>
                     </div>
-                     
-                    <!--div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm> 
-                            <label>Sender Legal Entity Name</label>
-                            <md-select name="repeatSelectNonRA" id="repeatSelectNonRA" ng-model="_ctrl.selected.SENDER._toLegalEntityId">
-                                <md-option ng-repeat="nra in _ctrl.nonRALegalEntityOptions" value="{{nra.id}}" ng-selected="{{_ctrl.selected.SENDER._toLegalEntityId == nra.id}}">{{nra.name}}</md-option>
-                            </md-select>
-                        </md-input-container>                    
-                        <md-button class="md-raised md-primary" ng-click="_ctrl.getSenderLegalEntityByLEId(_ctrl.selected.SENDER._toLegalEntityId)">Get Sender LE</md-button>
-                    </div-->                      
                 </form>
             </md-content>
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
