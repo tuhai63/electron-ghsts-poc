@@ -23,7 +23,7 @@ angular.module('ghstsApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngMessages'])
     .service('ghstsService', ['receiverService', 'legalEntityService', GhstsService])
     .controller('ghstsController', ['$mdDialog', 'ghstsService', GhstsController]);
 
-function config($routeProvider) {
+function config($routeProvider, $mdThemingProvider) {
     $routeProvider
         .when('/home', {
             templateUrl: './splash.html' ,
@@ -46,7 +46,10 @@ function config($routeProvider) {
             controllerAs: '_ctrl'
         });
     $routeProvider.otherwise({ redirectTo: '/home' });
+    
+    // set the theme
+    $mdThemingProvider.theme('default');
 }
 
-config.$inject = ['$routeProvider'];
+config.$inject = ['$routeProvider', '$mdThemingProvider'];
 
