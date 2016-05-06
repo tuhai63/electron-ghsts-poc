@@ -68,32 +68,35 @@
                             </md-button>
                         </div>
                     </md-toolbar>
-                    <md-list>
-                        <md-list-item ng-repeat="sender in _ctrl.selected.SENDER track by $index" class="noright">
-                            <div layout-gt-sm="row" flex-gt-sm>
-                                <md-input-container class="md-block" flex-gt-sm> 
-                                    <label>Sender Legal Entity Name</label>
-                                    <md-select name="repeatSelectNonRA" id="repeatSelectNonRA" ng-model="_ctrl.selected.SENDER[$index]._toLegalEntityId">
-                                        <md-option ng-repeat="nra in _ctrl.nonRALegalEntityOptions" value="{{nra.id}}" ng-selected="{{_ctrl.selected.SENDER[$index]._toLegalEntityId == nra.id}}">{{nra.name}}</md-option>
-                                    </md-select>
-                                </md-input-container>  
-                                <div layout-gt-sm="row">
-                                    <md-input-container class="md-block" flex-gt-xs>
-                                        <label>Company Contact Regulatory Role</label>
-                                        <input ng-model="_ctrl.selected.SENDER[$index].COMPANY_CONTACT_REGULATORY_ROLE" type="text">
-                                    </md-input-container>     
-                                </div> 
-                                <div layout-gt-sm="row">
-                                    <md-input-container class="md-block" flex-gt-xs>
-                                        <label>Sender Remark</label>
-                                        <input ng-model="_ctrl.selected.SENDER[$index].REMARK" type="text">
-                                    </md-input-container>     
-                                </div>                                 
-                                <md-button class="md-secondary md-raised" ng-click="_ctrl.deleteSender(_ctrl.selected.SENDER[$index]._toLegalEntityId, $event)">Delete</md-button>
-                            </div>                                                          
-                        </md-list-item>
-                    </md-list>
- 
+
+                    <div ng-repeat="sender in _ctrl.selected.SENDER track by $index" >
+                        <div layout-gt-sm="row" flex-gt-sm>
+                            <md-input-container class="md-block" flex-gt-sm> 
+                                <label>Sender Legal Entity Name</label>
+                                <md-select name="repeatSelectNonRA" id="repeatSelectNonRA" ng-model="sender._toLegalEntityId">
+                                    <md-option ng-repeat="nra in _ctrl.nonRALegalEntityOptions" value="{{nra.id}}" ng-selected="{{sender._toLegalEntityId == nra.id}}">{{nra.name}}</md-option>
+                                </md-select>
+                            </md-input-container>  
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Role</label>
+                                    <input ng-model="sender.COMPANY_CONTACT_REGULATORY_ROLE" type="text">
+                                </md-input-container>     
+                            </div>                            
+                        </div>
+                        <div layout-gt-sm="row" flex-gt-sm>     
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Sender Remark</label>
+                                <input ng-model="sender.REMARK" type="text">
+                            </md-input-container>     
+                            <div layout-align="end">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <md-button class="md-secondary md-raised" ng-click="_ctrl.deleteSender(sender._toLegalEntityId, $event)">Delete</md-button>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </div>
+                     
                     <!--div layout-gt-sm="row">
                         <md-input-container class="md-block" flex-gt-sm> 
                             <label>Sender Legal Entity Name</label>

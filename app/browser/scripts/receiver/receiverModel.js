@@ -29,7 +29,6 @@ class Receiver {
         if(arguments.length === 1){
             // load from json
             Object.assign(this, json);
-            this.SENDER = new Sender(json.SENDER);
         }else{          
             this._identifier = null;      
             this._toLegalEntityId = null;        
@@ -51,10 +50,14 @@ class Receiver {
     addSender(sender){
         this.SENDER.push(sender);
     }
-    
+     
     toGHSTSJson() {
         let sendersJson = [];
-        this.SENDER.forEach(sender => senderJson.push(sender.toGHSTSJson()));   
+        // convert senders Json to GHSTSJson
+        this.SENDER.forEach(sender => {
+            let senderObj = new Sender(sender);
+            sendersJson.push(senderObj.toGHSTSJson());
+        }); 
              
         return {            
             attr$ : {  Id : this._identifier, To_Legal_Entity_Id : this._toLegalEntityId  },

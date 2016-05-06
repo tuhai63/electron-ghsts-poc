@@ -161,7 +161,6 @@ class LegalEntityController {
                                 .targetEvent($event);
         
         this.$mdDialog.show(confirm).then(() => {
-            let self = this;
             // delete the specific other name 
             _.pull(this.selected.OTHER_NAME, otherName );
             // update the legal entity            
@@ -178,7 +177,6 @@ class LegalEntityController {
                                 .targetEvent($event);
         
         this.$mdDialog.show(confirm).then(() => {
-            let self = this;
             // delete the specific other name 
             _.pull(this.selected.OTHER_NAME, otherName );
             // update the legal entity            
@@ -201,7 +199,6 @@ class LegalEntityController {
                                 .targetEvent($event);
         
         this.$mdDialog.show(confirm).then(() => {
-            let self = this;
             // delete the specific identifier
             _.remove(this.selected.LEGALENTITY_IDENTIFIER, { IDENTIFIER: identifier });
             // update the legal entity            
@@ -218,7 +215,6 @@ class LegalEntityController {
                                 .targetEvent($event);
         
         this.$mdDialog.show(confirm).then(() => {
-            let self = this;
             // delete the contact person by matching first and last names
             _.remove(this.selected.CONTACT_PERSON, { FIRSTNAME: person.FIRSTNAME, LASTNAME:  person.LASTNAME });
             // update the legal entity            

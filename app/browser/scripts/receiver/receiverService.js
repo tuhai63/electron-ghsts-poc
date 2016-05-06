@@ -105,7 +105,7 @@ class ReceiverService {
                 receiver.SHORT_NAME = rcvr.SHORT_NAME[0];
 
                 let sender = new Sender();
-                // the sample only has one sender in each receiver 
+                // the sample only has one sender in each receiver, otherwise we need to loop through the senders 
                 sender.toLegalEntityId = rcvr.SENDER[0].attr$.To_Legal_Entity_Id,
                 sender.COMPANY_CONTACT_REGULATORY_ROLE = rcvr.SENDER[0].COMPANY_CONTACT_REGULATORY_ROLE[0],
                 sender.REMARK =  (rcvr.SENDER[0].REMARK[0] === undefined ? null : rcvr.SENDER[0].REMARK[0]);
