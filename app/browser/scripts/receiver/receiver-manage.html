@@ -70,23 +70,20 @@
                         </div>
                     </md-toolbar>
 
-                    <div ng-repeat="sender in _ctrl.selected.SENDER track by $index" >
-                        <p/>
-                        <div layout-gt-sm="row" flex-gt-sm>
+                    <div ng-repeat="sender in _ctrl.selected.SENDER track by $index" md-whiteframe="2" layout-padding>                        
+                        <div layout-gt-sm="row">
                             <md-input-container class="md-block" flex-gt-sm> 
                                 <label>Sender Legal Entity Name</label>
                                 <md-select name="repeatSelectNonRA" id="repeatSelectNonRA" ng-model="sender._toLegalEntityId">
                                     <md-option ng-repeat="nra in _ctrl.nonRALegalEntityOptions" value="{{nra.id}}" ng-selected="{{sender._toLegalEntityId == nra.id}}">{{nra.name}}</md-option>
                                 </md-select>
                             </md-input-container>  
-                            <div layout-gt-sm="row">
-                                <md-input-container class="md-block" flex-gt-sm>
-                                    <label>Role</label>
-                                    <input ng-model="sender.COMPANY_CONTACT_REGULATORY_ROLE" type="text">
-                                </md-input-container>     
-                            </div>                            
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Company Contact Regulatory Role</label>
+                                <input ng-model="sender.COMPANY_CONTACT_REGULATORY_ROLE" type="text">
+                            </md-input-container>         
                         </div>
-                        <div layout-gt-sm="row" flex-gt-sm>     
+                        <div layout-gt-sm="row">     
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>Sender Remark</label>
                                 <input ng-model="sender.REMARK" type="text">
@@ -99,6 +96,7 @@
                             </div>
                         </div>
                     </div>
+
                 </form>
             </md-content>
             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
