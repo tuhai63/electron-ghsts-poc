@@ -1,7 +1,6 @@
 <div style="width:100%" layout="column">
     <div style="width:100%" layout="row">
-        <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
-            <!--  md-is-locked-open="$mdMedia('gt-sm')"-->
+        <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
             <md-toolbar class="md-whiteframe-z1" layout="row">
                 <div class="md-toolbar-tools">
                     <md-button class="md-icon-button" aria-label="Home" ng-href="#/home">
@@ -68,10 +67,10 @@
                                 <md-icon class="material-icons" aria-label="Add Identifier">add_circle</md-icon>
                             </md-button>
                         </div>
-                    </md-toolbar>
-
-                    <div ng-repeat="sender in _ctrl.selected.SENDER track by $index" md-whiteframe="2" layout-padding>                        
-                        <div layout-gt-sm="row">
+                    </md-toolbar>                    
+                    
+                    <md-card class="inset" ng-repeat="sender in _ctrl.selected.SENDER track by $index">                        
+                        <div layout-gt-sm="row">  
                             <md-input-container class="md-block" flex-gt-sm> 
                                 <label>Sender Legal Entity Name</label>
                                 <md-select name="repeatSelectNonRA" id="repeatSelectNonRA" ng-model="sender._toLegalEntityId">
@@ -95,7 +94,7 @@
                                 </md-input-container>
                             </div>
                         </div>
-                    </div>
+                    </md-card>
 
                 </form>
             </md-content>
