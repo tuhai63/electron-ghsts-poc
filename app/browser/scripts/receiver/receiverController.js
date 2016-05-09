@@ -80,7 +80,7 @@ class ReceiverController {
             });
         }
         else {            
-            this.receiverService.createReceiver(this.selected).then(affectedRows => 
+            this.receiverService.createReceiver(this.selected).then(affectedRows => {
                 self.$mdDialog.show(
                     self.$mdDialog
                         .alert()
@@ -89,8 +89,11 @@ class ReceiverController {
                         .content('Data Added Successfully!')
                         .ok('Ok')
                         .targetEvent($event)
-                )
-            );
+                );
+                
+                // refresh the receiver list
+                self.getAllReceivers();
+            });
         }
     }
     

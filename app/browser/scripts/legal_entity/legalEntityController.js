@@ -108,7 +108,7 @@ class LegalEntityController {
             });
         }
         else {            
-            this.legalEntityService.createLegalEntity(this.selected).then(affectedRows => 
+            this.legalEntityService.createLegalEntity(this.selected).then(affectedRows => {
                 self.$mdDialog.show(
                     self.$mdDialog
                         .alert()
@@ -117,8 +117,11 @@ class LegalEntityController {
                         .content('Data Added Successfully!')
                         .ok('Ok')
                         .targetEvent($event)
-                )
-            );
+                );
+                
+                // refresh the le list
+                self.getAllLegalEntities();
+            });
         }
     }
     
