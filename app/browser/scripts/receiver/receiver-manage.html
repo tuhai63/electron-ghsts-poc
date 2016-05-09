@@ -1,4 +1,4 @@
-<section layout="row" flex>
+<section layout-fill layout="row">
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
         <md-toolbar class="md-whiteframe-z1" layout="row">
             <div class="md-toolbar-tools">
@@ -14,16 +14,18 @@
             <label>Receiver</label>
             <input required name="receiverName" ng-model="_ctrl.filterText" ng-change="_ctrl.filterReceiver()">
         </md-input-container>  
-        <md-list>
-            <!-- notice work around for nedb. 'track by index'' to fix $$hashkey problem -->                
-            <md-list-item ng-repeat="it in _ctrl.receivers track by $index" ng-click="_ctrl.selectReceiver(it, $index)">
-                <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon>
-                <p>{{it.SHORT_NAME}}</p>
-            </md-list-item>
-        </md-list> 
+        <md-content>
+            <md-list>
+                <!-- notice work around for nedb. 'track by index'' to fix $$hashkey problem -->                
+                <md-list-item ng-repeat="it in _ctrl.receivers track by $index" ng-click="_ctrl.selectReceiver(it, $index)">
+                    <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon>
+                    <p>{{it.SHORT_NAME}}</p>
+                </md-list-item>
+            </md-list> 
+        </md-content>
     </md-sidenav>
 
-    <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
+    <div layout-fill layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
         <md-toolbar layout="row" class="md-whiteframe-z1">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" aria-label="Settings">
