@@ -27,12 +27,16 @@
 
     <div layout-fill layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
         <md-toolbar layout="row" class="md-whiteframe-z1">   
-            <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Settings">
+            <div class="md-toolbar-tools">                
+                <md-button class="md-icon-button" aria-label="">
                     <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon> 
                 </md-button>
-                <h2> {{ _ctrl.selected.LEGALENTITY_NAME }}</h2>                            
-                </div>                
+                <h2> {{ _ctrl.selected.LEGALENTITY_NAME }}</h2> 
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="toggleSidenav('left')" hide-gt-sm aria-label="Side Nav">
+                    <ng-md-icon class="material-icons" aria-label="Side Nav">menu</ng-md-icon>
+                </md-button>                      
+             </div>                
         </md-toolbar>            
                         
         <md-content layout-padding class="autoScroll">
