@@ -49,6 +49,8 @@ function config($routeProvider, $mdThemingProvider) {
     
     // set the theme
     $mdThemingProvider.theme('default');
+    // test color
+    // $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('orange');
 }
 
 config.$inject = ['$routeProvider', '$mdThemingProvider'];
