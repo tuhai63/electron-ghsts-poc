@@ -5,10 +5,11 @@ import uuid from 'node-uuid';
 import {_} from 'lodash';
 
 class ReceiverController {
-    constructor($mdDialog, ReceiverService, LegalEntityService) {
+    constructor($mdDialog, $mdSidenav, ReceiverService, LegalEntityService) {
         this.receiverService = ReceiverService;
         this.legalEntityService = LegalEntityService;
-        this.$mdDialog = $mdDialog;        
+        this.$mdDialog = $mdDialog;  
+        this.$mdSidenav = $mdSidenav;      
         this.selected = null;
         this.receivers = [];
         this.selectedIndex = 0;
@@ -22,7 +23,12 @@ class ReceiverController {
         
         // load receiver data
         this.getAllReceivers();
-    }      
+    }   
+    
+    toggleSidenav(componentId){
+        // toggle the side nave by component identifer 
+        this.$mdSidenav(componentId).toggle();
+    }   
   
     addSender(){
         // make sure it is valid to add an new sender by counting the NonRAs.
@@ -80,7 +86,7 @@ class ReceiverController {
             });
         }
         else {            
-            this.receiverService.createReceiver(this.selected).then(affectedRows => 
+            this.receiverService.createReceiver(this.selected).then(affectedRows => {
                 self.$mdDialog.show(
                     self.$mdDialog
                         .alert()
@@ -89,8 +95,11 @@ class ReceiverController {
                         .content('Data Added Successfully!')
                         .ok('Ok')
                         .targetEvent($event)
-                )
-            );
+                );
+                
+                // refresh the receiver list
+                self.getAllReceivers();
+            });
         }
     }
     
@@ -224,7 +233,7 @@ class ReceiverController {
     }
 }
 
-ReceiverController.$inject = ['$mdDialog', 'receiverService', 'legalEntityService'];
+ReceiverController.$inject = ['$mdDialog', '$mdSidenav', 'receiverService', 'legalEntityService'];
 
 export { ReceiverController }
 

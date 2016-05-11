@@ -6,10 +6,11 @@ import uuid from 'node-uuid';
 import {_} from 'lodash';
 
 class LegalEntityController {
-    constructor($mdDialog, LegalEntityService, PickListService) {
+    constructor($mdDialog, $mdSidenav, LegalEntityService, PickListService) {
         this.legalEntityService = LegalEntityService;
         this.pickListService = PickListService;
         this.$mdDialog = $mdDialog;        
+        this.$mdSidenav = $mdSidenav;
         this.selected = null;
         this.legalEntities = [];
         this.selectedIndex = 0;
@@ -27,6 +28,11 @@ class LegalEntityController {
         // Load initial data
         this.getAllLegalEntities();
     }      
+    
+    toggleSidenav(componentId){
+        // toggle the side nave by component identifer 
+        this.$mdSidenav(componentId).toggle();
+    }
   
     updateSelectedStatusDecode(){
         // update metadata status value decode upon selection change
@@ -108,7 +114,7 @@ class LegalEntityController {
             });
         }
         else {            
-            this.legalEntityService.createLegalEntity(this.selected).then(affectedRows => 
+            this.legalEntityService.createLegalEntity(this.selected).then(affectedRows => {
                 self.$mdDialog.show(
                     self.$mdDialog
                         .alert()
@@ -117,8 +123,11 @@ class LegalEntityController {
                         .content('Data Added Successfully!')
                         .ok('Ok')
                         .targetEvent($event)
-                )
-            );
+                );
+                
+                // refresh the le list
+                self.getAllLegalEntities();
+            });
         }
     }
     
@@ -292,7 +301,7 @@ class LegalEntityController {
     }
 }
 
-LegalEntityController.$inject = ['$mdDialog', 'legalEntityService', 'pickListService'];
+LegalEntityController.$inject = ['$mdDialog', '$mdSidenav', 'legalEntityService', 'pickListService'];
 
 export { LegalEntityController }
 

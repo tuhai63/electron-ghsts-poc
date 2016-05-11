@@ -6,7 +6,7 @@
                     <md-icon class="material-icons" aria-label="Home">home</md-icon>    
                 </md-button>
                 <h2>
-                    <span>Legal Entity Management</span>
+                    <span>Legal Entities</span>
                 </h2>
             </div>                
         </md-toolbar>
@@ -27,12 +27,12 @@
 
     <div layout-fill layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
         <md-toolbar layout="row" class="md-whiteframe-z1">   
-            <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Settings">
+            <div class="md-toolbar-tools">                
+                <md-button class="md-icon-button" aria-label="Legal Entities" ng-click="_ctrl.toggleSidenav('left')" hide-gt-sm>
                     <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon> 
                 </md-button>
-                <h2> {{ _ctrl.selected.LEGALENTITY_NAME }}</h2>                            
-                </div>                
+                <h2> {{ _ctrl.selected.LEGALENTITY_NAME }}</h2> 
+             </div>                
         </md-toolbar>            
                         
         <md-content layout-padding class="autoScroll">
@@ -184,13 +184,13 @@
                 </md-list>
             </form>
         </md-content>
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>     
+        <section layout="row" layout-xs="column" layout-align="center center" layout-wrap>     
             <md-button class="md-raised md-info" ng-click="_ctrl.createLegalEntity()">Add</md-button>
             <md-button class="md-raised md-primary" ng-click="_ctrl.saveLegalEntity()">Save</md-button>
             <md-button class="md-raised md-danger" ng-click="_ctrl.cancelEdit()">Cancel</md-button>
             <md-button class="md-raised md-warn" ng-click="_ctrl.deleteLegalEntity()">Delete</md-button>     
         </section>
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>    
+        <section layout="row" layout-sx="column" layout-align="center center" layout-wrap>    
             <md-button class="md-raised md-primary" ng-click="_ctrl.viewLegalEntityJson()">View LE JSON</md-button>                
             <md-button class="md-raised md-primary" ng-click="_ctrl.viewLegalEntityGHSTS()">View LE GHSTS</md-button>     
             <md-button class="md-raised md-warn" ng-click="_ctrl.addTestLE()">Add Sample LE to DB</md-button>   
