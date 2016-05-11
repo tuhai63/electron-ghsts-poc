@@ -61,7 +61,9 @@ class LegalEntityService {
         
     getLegalEntityByName(name) {
         let deferred = this.$q.defer();
-        this.legalEntities.find({'LEGALENTITY_NAME': name }, function (err, result) {
+        var re = new RegExp(name, 'i');
+        let condition = { $regex: re };
+        this.legalEntities.find({'LEGALENTITY_NAME': condition }, function (err, result) {
             if (err) deferred.reject(err);
             deferred.resolve(result);
         });  
