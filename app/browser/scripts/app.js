@@ -17,7 +17,7 @@ angular.module('ghstsApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngMessages'])
     .config(config)
     .service('pickListService', [PickListService])
     .service('legalEntityService', ['$q', LegalEntityService])
-    .controller('legalEntityController', ['$mdDialog', '$mdSidenav', 'legalEntityService', 'pickListService', LegalEntityController])
+    .controller('legalEntityController', ['$mdDialog', '$mdSidenav', '$location', 'legalEntityService', 'pickListService', LegalEntityController])
     .service('receiverService', ['$q', ReceiverService])
     .controller('receiverController', ['$mdDialog', '$mdSidenav', 'receiverService', 'legalEntityService', ReceiverController])
     .service('ghstsService', ['receiverService', 'legalEntityService', GhstsService])
@@ -50,7 +50,7 @@ function config($routeProvider, $mdThemingProvider) {
     // set the theme
     $mdThemingProvider.theme('default');
     // test color
-    // $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('orange');
+    //$mdThemingProvider.theme('default').primaryPalette('pink').accentPalette('orange');
 }
 
 config.$inject = ['$routeProvider', '$mdThemingProvider'];
