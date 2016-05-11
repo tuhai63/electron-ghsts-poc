@@ -126,7 +126,10 @@ class LegalEntityController {
             });
     }
     
-    saveLegalEntity($event) {        
+    saveLegalEntity($event) {   
+        // reset form state
+        this._setFormPrestine($event);
+                     
         let self = this;
         if (this.selected != null && this.selected._id != null) {
             this.legalEntityService.updateLegalEntity(this.selected).then(function (affectedRows) {
@@ -139,9 +142,6 @@ class LegalEntityController {
                         .ok('Ok')
                         .targetEvent($event)
                 );
-                
-                // reset form state
-                this._setFormPrestine($event);
             });
         }
         else {            
@@ -156,8 +156,6 @@ class LegalEntityController {
                         .targetEvent($event)
                 );
                 
-                // reset form state
-                this._setFormPrestine($event);
                 // refresh the le list
                 self.getAllLegalEntities();
             });
