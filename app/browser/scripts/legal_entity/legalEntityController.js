@@ -6,11 +6,12 @@ import uuid from 'node-uuid';
 import {_} from 'lodash';
 
 class LegalEntityController {
-    constructor($mdDialog, $mdSidenav, LegalEntityService, PickListService) {
+    constructor($mdDialog, $mdSidenav, $location, LegalEntityService, PickListService) {
         this.legalEntityService = LegalEntityService;
         this.pickListService = PickListService;
         this.$mdDialog = $mdDialog;        
         this.$mdSidenav = $mdSidenav;
+        this.$location = $location;
         this.selected = null;
         this.legalEntities = [];
         this.selectedIndex = 0;
@@ -28,6 +29,33 @@ class LegalEntityController {
         // Load initial data
         this.getAllLegalEntities();
     }      
+    
+    confirmLeavePage($event){
+        // confirm with user if the form has been modified before leaving the page   
+        var scope = angular.element($event.target.ownerDocument.leForm).scope();    
+        let isFormPristine = scope.leForm.$pristine;   
+        if(! isFormPristine){
+            $event.preventDefault();   
+            // ask the user to confirm before leaving page
+            let confirm = this.$mdDialog.confirm()
+                                .title('Form Modified')
+                                .content('Are you sure you want to leave this page?')
+                                .ok('Yes')
+                                .cancel('No')
+                                .targetEvent($event);
+        
+            this.$mdDialog.show(confirm).then(() => {                
+                console.log('taking the user to the page');
+                this.$location.path('/home');
+            })
+        }
+    }
+    
+    _setFormPrestine($event){
+        // private - set the to its prestine state after save or update
+        var scope = angular.element($event.target.ownerDocument.leForm).scope();    
+        scope.leForm.$setPristine();   
+    }
     
     toggleSidenav(componentId){
         // toggle the side nave by component identifer 
@@ -98,7 +126,10 @@ class LegalEntityController {
             });
     }
     
-    saveLegalEntity($event) {
+    saveLegalEntity($event) {   
+        // reset form state
+        this._setFormPrestine($event);
+                     
         let self = this;
         if (this.selected != null && this.selected._id != null) {
             this.legalEntityService.updateLegalEntity(this.selected).then(function (affectedRows) {
@@ -301,7 +332,7 @@ class LegalEntityController {
     }
 }
 
-LegalEntityController.$inject = ['$mdDialog', '$mdSidenav', 'legalEntityService', 'pickListService'];
+LegalEntityController.$inject = ['$mdDialog', '$mdSidenav', '$location', 'legalEntityService', 'pickListService'];
 
 export { LegalEntityController }
 

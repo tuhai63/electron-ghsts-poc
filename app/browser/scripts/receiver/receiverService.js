@@ -30,7 +30,9 @@ class ReceiverService {
 
     getReceiverByName(name) {
         let deferred = this.$q.defer();
-        this.receivers.find({ 'SHORT_NAME': name }, function (err, result) {
+        var re = new RegExp(name, 'i');
+        let condition = { $regex: re };
+        this.receivers.find({ 'SHORT_NAME': condition }, function (err, result) {
             if (err) deferred.reject(err);
             deferred.resolve(result);
         });

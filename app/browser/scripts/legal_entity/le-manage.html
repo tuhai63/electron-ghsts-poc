@@ -2,7 +2,7 @@
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
         <md-toolbar class="md-whiteframe-z1" layout="row">
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Home" ng-href="#/home">
+                <md-button class="md-icon-button" aria-label="Home" ng-href="#/home" ng-click="_ctrl.confirmLeavePage($event)">
                     <md-icon class="material-icons" aria-label="Home">home</md-icon>    
                 </md-button>
                 <h2>
@@ -36,7 +36,7 @@
         </md-toolbar>            
                         
         <md-content layout-padding class="autoScroll">
-            <form name = "leForm">
+            <form id = "leForm" name = "leForm">
                 <div layout-gt-xs="row">
                     <md-input-container class="md-block" flex-gt-sm>                    
                         <label>Identifier</label>
@@ -186,7 +186,7 @@
         </md-content>
         <section layout="row" layout-xs="column" layout-align="center center" layout-wrap>     
             <md-button class="md-raised md-info" ng-click="_ctrl.createLegalEntity()">Add</md-button>
-            <md-button class="md-raised md-primary" ng-click="_ctrl.saveLegalEntity()">Save</md-button>
+            <md-button class="md-raised md-primary" ng-click="_ctrl.saveLegalEntity($event)">Save</md-button>
             <md-button class="md-raised md-danger" ng-click="_ctrl.cancelEdit()">Cancel</md-button>
             <md-button class="md-raised md-warn" ng-click="_ctrl.deleteLegalEntity()">Delete</md-button>     
         </section>
