@@ -8,20 +8,22 @@ import {LegalEntityController} from './legal_entity/legalEntityController';
 import {ReceiverService} from './receiver/receiverService'; 
 import {ReceiverController} from './receiver/receiverController';
 import {GhstsService} from './ghsts_demo/ghstsService'; 
+import {PickListService} from './common/pickListService';
 import {GhstsController} from './ghsts_demo/ghstsController';
 // notice stylesheet loading from app.js
 import '../jspm_packages/github/angular/bower-material@1.0.4/angular-material.css!';
 
 angular.module('ghstsApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngMessages'])
     .config(config)
+    .service('pickListService', [PickListService])
     .service('legalEntityService', ['$q', LegalEntityService])
-    .controller('legalEntityController', ['$mdDialog', 'legalEntityService', LegalEntityController])
+    .controller('legalEntityController', ['$mdDialog', '$mdSidenav', '$location', 'legalEntityService', 'pickListService', LegalEntityController])
     .service('receiverService', ['$q', ReceiverService])
-    .controller('receiverController', ['$mdDialog', 'receiverService', 'legalEntityService', ReceiverController])
+    .controller('receiverController', ['$mdDialog', '$mdSidenav', 'receiverService', 'legalEntityService', ReceiverController])
     .service('ghstsService', ['receiverService', 'legalEntityService', GhstsService])
     .controller('ghstsController', ['$mdDialog', 'ghstsService', GhstsController]);
 
-function config($routeProvider) {
+function config($routeProvider, $mdThemingProvider) {
     $routeProvider
         .when('/home', {
             templateUrl: './splash.html' ,
@@ -44,7 +46,12 @@ function config($routeProvider) {
             controllerAs: '_ctrl'
         });
     $routeProvider.otherwise({ redirectTo: '/home' });
+    
+    // set the theme
+    $mdThemingProvider.theme('default');
+    // test color
+    //$mdThemingProvider.theme('default').primaryPalette('pink').accentPalette('orange');
 }
 
-config.$inject = ['$routeProvider'];
+config.$inject = ['$routeProvider', '$mdThemingProvider'];
 

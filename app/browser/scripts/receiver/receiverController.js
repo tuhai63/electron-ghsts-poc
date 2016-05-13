@@ -2,12 +2,14 @@ import angular from 'angular';
 import {ValueStruct, IdentifierStruct} from '../common/sharedModel.js';
 import {Receiver, Sender} from './receiverModel.js'
 import uuid from 'node-uuid';
+import {_} from 'lodash';
 
 class ReceiverController {
-    constructor($mdDialog, ReceiverService, LegalEntityService) {
+    constructor($mdDialog, $mdSidenav, ReceiverService, LegalEntityService) {
         this.receiverService = ReceiverService;
         this.legalEntityService = LegalEntityService;
-        this.$mdDialog = $mdDialog;        
+        this.$mdDialog = $mdDialog;  
+        this.$mdSidenav = $mdSidenav;      
         this.selected = null;
         this.receivers = [];
         this.selectedIndex = 0;
@@ -21,8 +23,33 @@ class ReceiverController {
         
         // load receiver data
         this.getAllReceivers();
-    }      
+    }   
+    
+    toggleSidenav(componentId){
+        // toggle the side nave by component identifer 
+        this.$mdSidenav(componentId).toggle();
+    }   
   
+    addSender(){
+        // make sure it is valid to add an new sender by counting the NonRAs.
+        if( this.nonRALegalEntityOptions.length > this.selected.SENDER.length){
+            this.selected.SENDER.push({_toLegalEntityId: '', COMPANY_CONTACT_REGULATORY_ROLE: 'Sender'});                
+        } else {
+            this.$mdDialog.show(
+                this.$mdDialog
+                    .alert()
+                    .clickOutsideToClose(true)
+                    .title('Invalid Operation')
+                    .content('There are no more potential senders to add.')
+                    .ok('Ok')
+            );
+        }
+    }
+    
+    deleteSender(toLegalEntityId){
+        _.remove(this.selected.SENDER, { _toLegalEntityId: toLegalEntityId } );
+    }
+    
     selectReceiver(receiver, index) {
         this.selected = angular.isNumber(receiver) ? this.receivers[receiver] : receiver;
         this.selectedIndex = angular.isNumber(receiver) ? receiver: index;
@@ -59,7 +86,7 @@ class ReceiverController {
             });
         }
         else {            
-            this.receiverService.createReceiver(this.selected).then(affectedRows => 
+            this.receiverService.createReceiver(this.selected).then(affectedRows => {
                 self.$mdDialog.show(
                     self.$mdDialog
                         .alert()
@@ -68,8 +95,11 @@ class ReceiverController {
                         .content('Data Added Successfully!')
                         .ok('Ok')
                         .targetEvent($event)
-                )
-            );
+                );
+                
+                // refresh the receiver list
+                self.getAllReceivers();
+            });
         }
     }
     
@@ -203,7 +233,7 @@ class ReceiverController {
     }
 }
 
-ReceiverController.$inject = ['$mdDialog', 'receiverService', 'legalEntityService'];
+ReceiverController.$inject = ['$mdDialog', '$mdSidenav', 'receiverService', 'legalEntityService'];
 
 export { ReceiverController }
 

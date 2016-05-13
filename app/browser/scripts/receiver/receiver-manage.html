@@ -1,102 +1,116 @@
-<div style="width:100%" layout="column">
-    <md-toolbar class="md-whiteframe-z1" layout="row">
-        <md-button class="md-warn" aria-label="Home" ng-href="#/home">Home</md-button>
-        <h2>
-          <span>Receiver Management</span>
-        </h2>
-    </md-toolbar>
-    <div style="width:100%" layout="row">
-        <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
-            <!--  md-is-locked-open="$mdMedia('gt-sm')"-->
-            <md-toolbar layout="row" class="md-whiteframe-z1">
-                <md-headline layout-padding>Receivers</md-headline>
-            </md-toolbar>
-            <md-input-container style="margin-bottom:0">
-                <label>Receiver</label>
-                <input required name="receiverName" ng-model="_ctrl.filterText" ng-change="_ctrl.filterReceiver()">
-            </md-input-container>
+<section layout-fill layout="row">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+        <md-toolbar class="md-whiteframe-z1" layout="row">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Home" ng-href="#/home">
+                    <md-icon class="material-icons" aria-label="Home">home</md-icon>    
+                </md-button>
+                <h2>
+                    <span>Receivers</span>
+                </h2>
+            </div>                
+        </md-toolbar>
+        <md-input-container style="margin-bottom:0">
+            <label>Receiver</label>
+            <input required name="receiverName" ng-model="_ctrl.filterText" ng-change="_ctrl.filterReceiver()">
+        </md-input-container>  
+        <md-content>
             <md-list>
                 <!-- notice work around for nedb. 'track by index'' to fix $$hashkey problem -->                
                 <md-list-item ng-repeat="it in _ctrl.receivers track by $index" ng-click="_ctrl.selectReceiver(it, $index)">
+                    <md-icon class="material-icons" aria-label="Legal Entity">business</md-icon>
                     <p>{{it.SHORT_NAME}}</p>
                 </md-list-item>
-            </md-list>
-        </md-sidenav>
+            </md-list> 
+        </md-content>
+    </md-sidenav>
 
-        <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
-            <md-toolbar layout="row" class="md-whiteframe-z1">
-                <md-headline layout-padding>{{ _ctrl.selected.SHORT_NAME }}</md-headline>
-            </md-toolbar>            
-                         
-            <md-content layout-padding class="autoScroll">
-                <form name = "recevierForm">
-                    <!--div layout-gt-xs="row">                        
-                        <md-input-container class="md-block" flex-gt-xs>                        
-                            <label>Identifier</label>
-                            <input ng-model="_ctrl.selected._identifier" readonly>
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-xs>
-                            <label>Receiver Legal Entity Id</label>
-                            <input ng-model="_ctrl.selected._toLegalEntityId" type="text" readonly>
-                        </md-input-container> 
-                    </div-->
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm> 
-                            <label>Receiver Legal Entity Name</label>
-                            <md-select name="repeatSelectRA" id="repeatSelectRA" ng-model="_ctrl.selected._toLegalEntityId">
-                                <md-option ng-repeat="ra in _ctrl.regulatoryAuthorityOptions" value="{{ra.id}}" ng-selected="{{_ctrl.selected._toLegalEntityId == ra.id}}">{{ra.name}}</md-option>
-                            </md-select>
-                        </md-input-container>                    
-                        <md-button class="md-raised md-primary" ng-click="_ctrl.getReceiverLegalEntityByLEId(_ctrl.selected._toLegalEntityId)">Get Receiver LE</md-button>
-                    </div>                                     
-                    <div layout-gt-sm="row">
-                        <md-input-container  class="md-block" flex-gt-sm>
-                            <label>Short Name</label>
-                            <input name="shortName" ng-model="_ctrl.selected.SHORT_NAME" type="text" required>
-                            <div ng-messages="recevierForm.shortName.$error">
-                                <div ng-message="required">Short Name is required.</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Role</label>
-                            <input ng-model="_ctrl.selected.ROLE" type="text" ng-required="false" readonly>
-                        </md-input-container>
+    <div layout-fill layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">            
+        <md-toolbar layout="row" class="md-whiteframe-z1">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Receivers" ng-click="_ctrl.toggleSidenav('left')" hide-gt-sm>
+                    <md-icon class="material-icons" aria-label="Receiver">business</md-icon> 
+                </md-button>
+                <h2>{{ _ctrl.selected.SHORT_NAME }}</h2>
+            </div>
+        </md-toolbar>            
+                        
+        <md-content layout-padding class="autoScroll">
+            <form name = "recevierForm">
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm> 
+                        <label>Receiver Legal Entity Name</label>
+                        <md-select name="repeatSelectRA" id="repeatSelectRA" ng-model="_ctrl.selected._toLegalEntityId">
+                            <md-option ng-repeat="ra in _ctrl.regulatoryAuthorityOptions" value="{{ra.id}}" ng-selected="{{_ctrl.selected._toLegalEntityId == ra.id}}">{{ra.name}}</md-option>
+                        </md-select>
+                    </md-input-container>                    
+                    <!--md-button class="md-raised md-primary" ng-click="_ctrl.getReceiverLegalEntityByLEId(_ctrl.selected._toLegalEntityId)">Get Receiver LE</md-button-->
+                </div>                                     
+                <div layout-gt-sm="row">
+                    <md-input-container  class="md-block" flex-gt-sm>
+                        <label>Short Name</label>
+                        <input name="shortName" ng-model="_ctrl.selected.SHORT_NAME" type="text" required>
+                        <div ng-messages="recevierForm.shortName.$error">
+                            <div ng-message="required">Short Name is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Role</label>
+                        <input ng-model="_ctrl.selected.ROLE" type="text" ng-required="false">
+                    </md-input-container>
+                </div>
+                
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2>Senders</h2>
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-click="_ctrl.addSender()">
+                            <md-icon class="material-icons" aria-label="Add Identifier">add_circle</md-icon>
+                        </md-button>
                     </div>
-                    <!--div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-xs>
-                            <label>Sender Legal Entity Id</label>
-                            <input ng-model="_ctrl.selected.SENDER._toLegalEntityId" type="text" readonly>
-                        </md-input-container> 
-                    </div-->
-                    <div layout-gt-sm="row">
+                </md-toolbar>                    
+                
+                <md-card class="inset" ng-repeat="sender in _ctrl.selected.SENDER track by $index">                        
+                    <div layout-gt-sm="row">  
                         <md-input-container class="md-block" flex-gt-sm> 
                             <label>Sender Legal Entity Name</label>
-                            <md-select name="repeatSelectNonRA" id="repeatSelectNonRA" ng-model="_ctrl.selected.SENDER._toLegalEntityId">
-                                <md-option ng-repeat="nra in _ctrl.nonRALegalEntityOptions" value="{{nra.id}}" ng-selected="{{_ctrl.selected.SENDER._toLegalEntityId == nra.id}}">{{nra.name}}</md-option>
+                            <md-select name="repeatSelectNonRA" id="repeatSelectNonRA" ng-model="sender._toLegalEntityId">
+                                <md-option ng-repeat="nra in _ctrl.nonRALegalEntityOptions" value="{{nra.id}}" ng-selected="{{sender._toLegalEntityId == nra.id}}">{{nra.name}}</md-option>
                             </md-select>
-                        </md-input-container>                    
-                        <md-button class="md-raised md-primary" ng-click="_ctrl.getSenderLegalEntityByLEId(_ctrl.selected.SENDER._toLegalEntityId)">Get Sender LE</md-button>
-                    </div>  
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-xs>
-                            <label>Sender Remark</label>
-                            <input ng-model="_ctrl.selected.SENDER.REMARK" type="text">
-                        </md-input-container>     
+                        </md-input-container>  
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Company Contact Regulatory Role</label>
+                            <input ng-model="sender.COMPANY_CONTACT_REGULATORY_ROLE" type="text">
+                        </md-input-container>         
                     </div>
-                </form>
-            </md-content>
-            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <md-button class="md-raised md-info" ng-click="_ctrl.createReceiver()">Add</md-button>                                
-                <md-button class="md-raised md-primary" ng-click="_ctrl.saveReceiver()" ng-disabled="recevierForm.$invalid">Save</md-button>
-                <md-button class="md-raised md-danger" ng-click="_ctrl.cancelEdit()">Cancel</md-button>
-                <md-button class="md-raised md-warn" ng-click="_ctrl.deleteReceiver()">Delete</md-button>      
-                <md-button class="md-raised md-primary" ng-click="_ctrl.viewReceiverJson()">View Receiver JSON</md-button>                
-                <md-button class="md-raised md-primary" ng-click="_ctrl.viewReceiverGHSTS()">View Receiver GHSTS</md-button>                                      
-                
-                <md-button class="md-raised md-warn" ng-click="_ctrl.addTestRcvr()">Add Sample Receiver to DB</md-button>   
-                <md-button class="md-raised md-warn" ng-click="_ctrl.initializeRcvr()">Initalize DB with Sample GHSTS Recivers</md-button>
-                
-            </section>  
-        </div>
+                    <div layout-gt-sm="row">     
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Sender Remark</label>
+                            <input ng-model="sender.REMARK" type="text">
+                        </md-input-container>     
+                        <div layout-align="end">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <md-button class="md-secondary md-raised" ng-click="_ctrl.deleteSender(sender._toLegalEntityId, $event)">Delete</md-button>
+                                <!--md-button class="md-raised md-primary" ng-click="_ctrl.getSenderLegalEntityByLEId(_ctrl.selected.SENDER._toLegalEntityId)">Get Sender LE</md-button-->
+                            </md-input-container>
+                        </div>
+                    </div>
+                </md-card>
+
+            </form>
+        </md-content>
+        <section layout="row" layout-sx="column" layout-align="center center" layout-wrap>
+            <md-button class="md-raised md-info" ng-click="_ctrl.createReceiver()">Add</md-button>                                
+            <md-button class="md-raised md-primary" ng-click="_ctrl.saveReceiver()" ng-disabled="recevierForm.$invalid">Save</md-button>
+            <md-button class="md-raised md-danger" ng-click="_ctrl.cancelEdit()">Cancel</md-button>
+            <md-button class="md-raised md-warn" ng-click="_ctrl.deleteReceiver()">Delete</md-button>  
+        </section>
+        <section layout="row" layout-sx="column" layout-align="center center" layout-wrap>
+            <md-button class="md-raised md-primary" ng-click="_ctrl.viewReceiverJson()">View Receiver JSON</md-button>                
+            <md-button class="md-raised md-primary" ng-click="_ctrl.viewReceiverGHSTS()">View Receiver GHSTS</md-button>  
+            <md-button class="md-raised md-warn" ng-click="_ctrl.addTestRcvr()">Add Sample Receiver to DB</md-button>   
+            <md-button class="md-raised md-warn" ng-click="_ctrl.initializeRcvr()">Initalize DB with Sample GHSTS Recivers</md-button>
+            
+        </section>  
     </div>
-</div>
+</section>

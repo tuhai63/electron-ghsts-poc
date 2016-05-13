@@ -16,6 +16,7 @@ System.config({
   map: {
     "angular": "github:angular/bower-angular@1.5.4",
     "angular-material": "github:angular/bower-material@1.0.4",
+    "angular-material-icons": "npm:angular-material-icons@0.7.0",
     "angular-messages": "github:angular/bower-angular-messages@1.5.3",
     "angular-route": "github:angular/bower-angular-route@1.4.9",
     "babel": "npm:babel-core@5.8.25",
@@ -24,6 +25,7 @@ System.config({
     "core-js": "npm:core-js@1.1.4",
     "css": "github:systemjs/plugin-css@0.1.20",
     "json": "github:systemjs/plugin-json@0.1.0",
+    "lodash": "npm:lodash@4.11.1",
     "nedb": "npm:nedb@1.7.2",
     "node-uuid": "npm:node-uuid@1.4.7",
     "path": "npm:path@0.12.7",
@@ -86,6 +88,9 @@ System.config({
     },
     "github:twbs/bootstrap@3.3.6": {
       "jquery": "github:components/jquery@2.2.0"
+    },
+    "npm:angular-material-icons@0.7.0": {
+      "angular": "npm:angular@1.5.5"
     },
     "npm:asap@1.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -257,6 +262,10 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "promise": "npm:promise@5.0.0"
+    },
+    "npm:lodash@4.11.1": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:lodash@4.5.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
